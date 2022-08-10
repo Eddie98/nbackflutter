@@ -18,6 +18,8 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
       list.last == list.reversed.elementAt(2);
 
   void trainingEventHandler(event, emit) {
+    if (event is TrainingInitialEvent) emit(const TrainingProccess());
+
     if (state.colors.length > 2 && state.positions.length > 2) {
       if (event is TrainingColorBtnClickEvent) {
         if (checkLastAndTwoPosBackEquality(state.colors)) {

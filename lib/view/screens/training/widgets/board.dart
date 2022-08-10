@@ -5,26 +5,28 @@ import '../bloc/training_bloc.dart';
 
 class BoardWidget extends StatelessWidget {
   final TrainingProccess state;
+  final double bodyHeight;
 
   const BoardWidget(
-    this.state, {
+    this.state,
+    this.bodyHeight, {
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-
-    // TODO: aspect ratio exact
-    final double itemHeight = size.height / 3.2;
-    final double itemWidth = size.width / 2;
+    const spacingsHeight = 80.0; // bottom spacing absent - 32.0 - if overflow.
+    const countersHeight = 25.0;
+    final itemHeight = (bodyHeight - spacingsHeight - countersHeight) / 3;
 
     return Expanded(
-      child: GridView.count(
-        crossAxisCount: 3,
-        mainAxisSpacing: 1.0,
-        crossAxisSpacing: 1.0,
-        childAspectRatio: itemWidth / itemHeight,
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3,
+          mainAxisExtent: itemHeight,
+          mainAxisSpacing: 1.0,
+          crossAxisSpacing: 1.0,
+        ),
         padding: const EdgeInsets.symmetric(
           horizontal: defaultHorPadding,
         ),

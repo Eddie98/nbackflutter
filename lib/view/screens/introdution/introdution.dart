@@ -15,7 +15,7 @@ class IntrodutionScreen extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             snap: false,
-            floating: true,
+            floating: false,
             expandedHeight: size.height * .25,
             flexibleSpace: const FlexibleSpaceBar(
               title: Text(mainTitle),
@@ -25,7 +25,9 @@ class IntrodutionScreen extends StatelessWidget {
                 left: defaultHorPadding,
               ),
               background: DecoratedBox(
-                decoration: BoxDecoration(color: Colors.transparent),
+                decoration: BoxDecoration(
+                  color: AppColors.mainBlackColor,
+                ),
               ),
             ),
           ),

@@ -7,6 +7,10 @@ abstract class TrainingEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class TrainingInitialEvent extends TrainingEvent {
+  const TrainingInitialEvent();
+}
+
 class TrainingStartEvent extends TrainingEvent {
   final int counter;
   final bool isPause;

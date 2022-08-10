@@ -24,19 +24,21 @@ class _TrainingScreenState extends State<TrainingScreen> {
   void initState() {
     trainingBloc = context.read<TrainingBloc>();
 
+    trainingBloc.add(const TrainingInitialEvent());
     Timer.periodic(
-      const Duration(seconds: statePersistSecondsDuration + 1),
+      const Duration(milliseconds: statePersistMilliSecondsDuration + 1000),
       (Timer timer) {
         if (mounted) timerCallback(timer.tick);
       },
     );
+
     super.initState();
   }
 
   void timerCallback(int tick) async {
     trainingBloc.add(TrainingStartEvent(tick, isPause: false));
     await Future.delayed(
-      const Duration(seconds: statePersistSecondsDuration),
+      const Duration(milliseconds: statePersistMilliSecondsDuration),
     );
     trainingBloc.add(TrainingStartEvent(tick, isPause: true));
   }
@@ -78,23 +80,30 @@ class _TrainingScreenState extends State<TrainingScreen> {
           },
         ),
       ),
-      body: BlocConsumer<TrainingBloc, TrainingProccess>(
-        listenWhen: (oldState, newState) => newState.counter > counterMaxLimit,
-        listener: (context, state) {
-          // TODO: Redirect to results screens
-        },
-        buildWhen: (oldState, newState) => newState.counter <= counterMaxLimit,
-        builder: (context, state) {
-          return Column(
-            children: [
-              sizedBoxHeight(22.0),
-              CountersRowWidget(state),
-              sizedBoxHeight(32.0),
-              BoardWidget(state),
-              sizedBoxHeight(22.0),
-            ],
-          );
-        },
+      body: SafeArea(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return BlocConsumer<TrainingBloc, TrainingProccess>(
+              listenWhen: (oldState, newState) =>
+                  newState.counter > counterMaxLimit,
+              listener: (context, state) {
+                // TODO: Redirect to results screens
+              },
+              buildWhen: (oldState, newState) =>
+                  newState.counter <= counterMaxLimit,
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    sizedBoxHeight(22.0),
+                    CountersRowWidget(state),
+                    sizedBoxHeight(26.0),
+                    BoardWidget(state, constraints.maxHeight),
+                  ],
+                );
+              },
+            );
+          },
+        ),
       ),
     );
   }
