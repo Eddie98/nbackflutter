@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/app_constants.dart';
+import 'package:nbackflutter/utils/index.dart';
 
 import '../bloc/training_bloc.dart';
 
@@ -15,7 +16,7 @@ class BoardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const spacingsHeight = 80.0; // bottom spacing absent - 32.0 - if overflow.
+    const spacingsHeight = 66.0; // bottom spacing absent - 26.0 - if overflow.
     const countersHeight = 25.0;
     final itemHeight = (bodyHeight - spacingsHeight - countersHeight) / 3;
 
@@ -27,8 +28,8 @@ class BoardWidget extends StatelessWidget {
           mainAxisSpacing: 1.0,
           crossAxisSpacing: 1.0,
         ),
-        padding: const EdgeInsets.symmetric(
-          horizontal: defaultHorPadding,
+        padding: EdgeInsets.symmetric(
+          horizontal: getPropScreenWidth(defaultHorPadding),
         ),
         children: List.generate(9, (index) {
           if (!state.isPause &&
@@ -102,7 +103,7 @@ class _ColorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(6.0),
+      margin: EdgeInsets.all(getPropScreenWidth(6.0)),
       color: color,
     );
   }

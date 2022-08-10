@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'bloc_observer.dart';
 import 'constants/index.dart';
 import 'routes.dart';
 import 'view/screens/training/bloc/training_bloc.dart';
 
-void main() {
-  runApp(const MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  BlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    blocObserver: AppBlocObserver(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,7 +32,6 @@ class MyApp extends StatelessWidget {
           ),
           scaffoldBackgroundColor: AppColors.mainBlackColor,
         ),
-        routes: Routes.routesMap,
         initialRoute: Routes.introdutionLink,
         onGenerateRoute: Routes.onGenerateRoute,
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
+import 'package:nbackflutter/utils/index.dart';
 
 class FooterButton extends StatelessWidget {
   final int index;
@@ -17,12 +18,14 @@ class FooterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 6.0),
+        padding: EdgeInsets.symmetric(vertical: getPropScreenWidth(6.0)),
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            fixedSize: const Size(50, 66),
-            textStyle: TextStyles.trainingFooterButtonsTS,
+            fixedSize: Size(50, getPropScreenWidth(54.0)),
+            textStyle: TextStyles.trainingFooterButtonsTS.copyWith(
+              fontSize: getAdaptiveFontSize(15.0),
+            ),
             primary: AppColors.themeColor,
           ),
           child: Text(text.toUpperCase()),

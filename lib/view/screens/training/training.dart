@@ -3,7 +3,8 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
-import 'package:nbackflutter/view/widgets/sized_box.dart';
+import 'package:nbackflutter/utils/index.dart';
+import 'package:nbackflutter/view/widgets/index.dart';
 
 import 'bloc/training_bloc.dart';
 import 'widgets/board.dart';
@@ -45,12 +46,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
-          iconSize: 32.0,
-          icon: const Icon(Icons.close),
+          iconSize: getPropScreenWidth(26.0),
+          icon: const Icon(Icons.arrow_back),
         ),
         title: const Text(trainingAppbarText),
       ),
@@ -83,6 +86,22 @@ class _TrainingScreenState extends State<TrainingScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
+            // return SingleChildScrollView(
+            //   child: Container(
+            //     width: double.infinity,
+            //     height: constraints.maxHeight,
+            //     color: Colors.orange,
+            //     child: Column(
+            //       children: const [
+            //         Text('1'),
+            //         Text('2'),
+            //         Text('1'),
+            //         Text('1'),
+            //         Text('1'),
+            //       ],
+            //     ),
+            //   ),
+            // );
             return BlocConsumer<TrainingBloc, TrainingProccess>(
               listenWhen: (oldState, newState) =>
                   newState.counter > counterMaxLimit,
@@ -94,9 +113,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
               builder: (context, state) {
                 return Column(
                   children: [
-                    sizedBoxHeight(22.0),
+                    sizedBoxHeight(18.0),
                     CountersRowWidget(state),
-                    sizedBoxHeight(26.0),
+                    sizedBoxHeight(22.0),
                     BoardWidget(state, constraints.maxHeight),
                   ],
                 );

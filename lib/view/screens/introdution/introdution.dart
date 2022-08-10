@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
+import 'package:nbackflutter/utils/index.dart';
 
 class IntrodutionScreen extends StatelessWidget {
   const IntrodutionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -16,15 +19,16 @@ class IntrodutionScreen extends StatelessWidget {
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: size.height * .25,
-            flexibleSpace: const FlexibleSpaceBar(
-              title: Text(mainTitle),
+            expandedHeight: size.height * .20,
+            automaticallyImplyLeading: false,
+            flexibleSpace: FlexibleSpaceBar(
+              title: const Text(mainTitle),
               centerTitle: false,
               titlePadding: EdgeInsets.only(
-                bottom: defaultHorPadding,
-                left: defaultHorPadding,
+                bottom: getPropScreenWidth(defaultHorPadding),
+                left: getPropScreenWidth(defaultHorPadding),
               ),
-              background: DecoratedBox(
+              background: const DecoratedBox(
                 decoration: BoxDecoration(
                   color: AppColors.mainBlackColor,
                 ),
@@ -33,13 +37,15 @@ class IntrodutionScreen extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: defaultHorPadding,
-                vertical: defaultHorPadding * 2,
+              padding: EdgeInsets.symmetric(
+                horizontal: getPropScreenWidth(defaultHorPadding),
+                vertical: getPropScreenWidth(defaultHorPadding) * 2,
               ),
               child: Text(
                 mainDescription,
-                style: TextStyles.mainDescriptionTS,
+                style: TextStyles.mainDescriptionTS.copyWith(
+                  fontSize: getAdaptiveFontSize(17.0),
+                ),
               ),
             ),
           ),
@@ -47,12 +53,12 @@ class IntrodutionScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.pushNamed(context, Routes.trainingLink);
+          Navigator.of(context).pushNamed(Routes.trainingLink);
         },
         backgroundColor: AppColors.themeColor,
-        child: const Icon(
+        child: Icon(
           Icons.arrow_right_rounded,
-          size: 44.0,
+          size: getPropScreenWidth(44.0),
         ),
       ),
     );
