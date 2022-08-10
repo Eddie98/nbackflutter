@@ -1,10 +1,20 @@
-const mainTitle = 'Задача на внимание';
 const trainingAppbarText = 'Задача 2-назад';
-const trainingFooterBtnPositionText = 'Позиция';
-const trainingFooterBtnColorText = 'Цвет';
-const trainingCounterAllText = 'Всего';
-const trainingCounterCorrectText = 'Верно';
-const trainingCounterWrongText = 'Неверно';
+
+const categoryText = 'Категория';
+const positionText = 'Позиция';
+const colorText = 'Цвет';
+const allText = 'Всего';
+const correctText = 'Верно';
+const wrongText = 'Неверно';
+
+const resultsYourResults = 'Ваши результаты';
+const resultsTryMore = 'Попробуйте еще раз!';
+const resultsNotGoodEnoughCanMore = 'Не очень... Можно лучше!';
+const resultsNotbadCanMore = 'Неплохо! Можно лучше!';
+const resultsGoodButMore = 'Очень хорошо! Но можно еще лучше!';
+const resultsExcellent = 'Отлично! Превосходно!';
+
+const mainTitle = 'Задача на внимание';
 const mainDescription = '''
 Это упражнение тренирует внимание
 и развивает интеллект.

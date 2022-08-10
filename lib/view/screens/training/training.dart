@@ -72,7 +72,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
               children: [
                 FooterButton(
                   index: 0,
-                  text: trainingFooterBtnPositionText,
+                  text: positionText,
                   onTap: state.isPositionBtnDisabled
                       ? null
                       : () => trainingBloc
@@ -80,7 +80,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 ),
                 FooterButton(
                   index: 1,
-                  text: trainingFooterBtnColorText,
+                  text: colorText,
                   onTap: state.isColorBtnDisabled
                       ? null
                       : () =>

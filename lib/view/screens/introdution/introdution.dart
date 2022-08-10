@@ -48,9 +48,7 @@ class IntrodutionScreen extends StatelessWidget {
               ),
               child: Text(
                 mainDescription,
-                style: TextStyles.mainDescriptionTS.copyWith(
-                  fontSize: getAdaptiveFontSize(17.0),
-                ),
+                style: TextStyles.mainDescriptionTS(),
               ),
             ),
           ),

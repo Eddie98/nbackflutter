@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
-import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/screens/training/bloc/training_bloc.dart';
 
 class CountersRowWidget extends StatelessWidget {
@@ -14,27 +13,24 @@ class CountersRowWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         _CounterWidget(
-          trainingCounterAllText,
+          allText,
           state.counter,
-          TextStyles.trainingCountersTS.copyWith(
+          TextStyles.allColorPositionTS().copyWith(
             color: const Color.fromRGBO(224, 224, 224, 1),
-            fontSize: getAdaptiveFontSize(17.0),
           ),
         ),
         _CounterWidget(
-          trainingCounterCorrectText,
+          correctText,
           state.correctAnswers,
-          TextStyles.trainingCountersTS.copyWith(
+          TextStyles.allColorPositionTS().copyWith(
             color: const Color.fromRGBO(76, 175, 80, 1),
-            fontSize: getAdaptiveFontSize(17.0),
           ),
         ),
         _CounterWidget(
-          trainingCounterWrongText,
+          wrongText,
           state.wrongAnswers,
-          TextStyles.trainingCountersTS.copyWith(
+          TextStyles.allColorPositionTS().copyWith(
             color: const Color.fromRGBO(244, 67, 54, 1),
-            fontSize: getAdaptiveFontSize(17.0),
           ),
         ),
       ],

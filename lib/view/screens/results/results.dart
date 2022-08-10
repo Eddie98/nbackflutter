@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
+import 'package:nbackflutter/view/widgets/index.dart';
+
+import 'widgets/table.dart';
 
 class ResultsScreen extends StatelessWidget {
   const ResultsScreen({Key? key}) : super(key: key);
@@ -21,7 +24,36 @@ class ResultsScreen extends StatelessWidget {
         ),
         title: const Text(trainingAppbarText),
       ),
-      body: Container(),
+      body: Center(
+        child: Column(
+          children: [
+            sizedBoxHeight(42.0),
+            Text(
+              resultsYourResults,
+              style: TextStyles.allColorPositionTS().copyWith(
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            sizedBoxHeight(12.0),
+            Text(
+              '25%',
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize: getAdaptiveFontSize(26.0),
+                color: Colors.white,
+              ),
+            ),
+            sizedBoxHeight(28.0),
+            Text(
+              resultsTryMore,
+              style: TextStyles.allColorPositionTS().copyWith(
+                fontWeight: FontWeight.normal,
+              ),
+            ),
+            const TableWidget(),
+          ],
+        ),
+      ),
     );
   }
 }

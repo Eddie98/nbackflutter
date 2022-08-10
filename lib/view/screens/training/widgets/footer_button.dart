@@ -23,9 +23,7 @@ class FooterButton extends StatelessWidget {
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
             fixedSize: Size(50, getPropScreenWidth(54.0)),
-            textStyle: TextStyles.trainingFooterButtonsTS.copyWith(
-              fontSize: getAdaptiveFontSize(15.0),
-            ),
+            textStyle: TextStyles.trainingFooterButtonsTS(),
             primary: AppColors.themeColor,
           ),
           child: Text(text.toUpperCase()),
