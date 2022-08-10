@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
+import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
@@ -29,7 +30,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
     Timer.periodic(
       const Duration(milliseconds: statePersistMilliSecondsDuration + 1000),
       (Timer timer) {
-        if (mounted) timerCallback(timer.tick);
+        if (mounted && timer.tick <= counterMaxLimit + 1) {
+          timerCallback(timer.tick);
+        }
       },
     );
 
@@ -50,11 +53,16 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),
           iconSize: getPropScreenWidth(26.0),
           icon: const Icon(Icons.arrow_back),
         ),
+        actions: [
+          const SettingsButton(),
+          sizedBoxWidth(defaultHorPadding),
+        ],
         title: const Text(trainingAppbarText),
       ),
       bottomNavigationBar: BottomAppBar(
@@ -86,27 +94,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            // return SingleChildScrollView(
-            //   child: Container(
-            //     width: double.infinity,
-            //     height: constraints.maxHeight,
-            //     color: Colors.orange,
-            //     child: Column(
-            //       children: const [
-            //         Text('1'),
-            //         Text('2'),
-            //         Text('1'),
-            //         Text('1'),
-            //         Text('1'),
-            //       ],
-            //     ),
-            //   ),
-            // );
             return BlocConsumer<TrainingBloc, TrainingProccess>(
               listenWhen: (oldState, newState) =>
                   newState.counter > counterMaxLimit,
               listener: (context, state) {
-                // TODO: Redirect to results screens
+                Navigator.of(context).pushReplacementNamed(Routes.resultsLink);
               },
               buildWhen: (oldState, newState) =>
                   newState.counter <= counterMaxLimit,

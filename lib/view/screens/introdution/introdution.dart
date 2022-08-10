@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
+import 'package:nbackflutter/view/widgets/index.dart';
 
 class IntrodutionScreen extends StatelessWidget {
   const IntrodutionScreen({Key? key}) : super(key: key);
@@ -21,6 +22,10 @@ class IntrodutionScreen extends StatelessWidget {
             floating: false,
             expandedHeight: size.height * .20,
             automaticallyImplyLeading: false,
+            actions: [
+              const SettingsButton(),
+              sizedBoxWidth(defaultHorPadding),
+            ],
             flexibleSpace: FlexibleSpaceBar(
               title: const Text(mainTitle),
               centerTitle: false,
