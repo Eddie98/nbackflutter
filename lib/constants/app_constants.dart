@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 const double defaultHorPadding = 16.0;
 
-const int statePersistMilliSecondsDuration = 1500;
-const int counterMaxLimit = 2;
+const int statePersistSecondsDuration = 1;
+const int counterMaxLimit = 25;
+
+const String colorSign = 'c';
+const String positionSign = 'p';
 
 const List<Color> listOfColorsForRandomSelection = [
   Colors.red,
   Colors.green,
   Colors.blue,
-  Colors.black,
   Colors.yellow,
 ];
 

@@ -28,7 +28,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
     trainingBloc.add(const TrainingInitialEvent());
     Timer.periodic(
-      const Duration(milliseconds: statePersistMilliSecondsDuration + 1000),
+      const Duration(seconds: statePersistSecondsDuration + 1),
       (Timer timer) {
         if (mounted && timer.tick <= counterMaxLimit + 1) {
           timerCallback(timer.tick);
@@ -42,7 +42,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
   void timerCallback(int tick) async {
     trainingBloc.add(TrainingStartEvent(tick, isPause: false));
     await Future.delayed(
-      const Duration(milliseconds: statePersistMilliSecondsDuration),
+      const Duration(seconds: statePersistSecondsDuration),
     );
     trainingBloc.add(TrainingStartEvent(tick, isPause: true));
   }
@@ -98,7 +98,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
               listenWhen: (oldState, newState) =>
                   newState.counter > counterMaxLimit,
               listener: (context, state) {
-                Navigator.of(context).pushReplacementNamed(Routes.resultsLink);
+                Navigator.of(context).pushReplacementNamed(
+                  Routes.resultsLink,
+                  arguments: [state.correctAnswers, state.wrongAnswers],
+                );
               },
               buildWhen: (oldState, newState) =>
                   newState.counter <= counterMaxLimit,

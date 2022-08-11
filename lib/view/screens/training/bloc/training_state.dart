@@ -18,8 +18,8 @@ class TrainingProccess extends TrainingState {
   final bool isPositionBtnDisabled;
   final List<Color> colors;
   final List<int> positions;
-  final int correctAnswers;
-  final int wrongAnswers;
+  final List<String> correctAnswers;
+  final List<String> wrongAnswers;
 
   const TrainingProccess({
     this.counter = 0,
@@ -28,8 +28,8 @@ class TrainingProccess extends TrainingState {
     this.isPositionBtnDisabled = false,
     this.colors = const [],
     this.positions = const [],
-    this.correctAnswers = 0,
-    this.wrongAnswers = 0,
+    this.correctAnswers = const [],
+    this.wrongAnswers = const [],
   });
 
   TrainingProccess copyWith({
@@ -39,8 +39,8 @@ class TrainingProccess extends TrainingState {
     bool? isPositionBtnDisabled,
     List<Color>? colors,
     List<int>? positions,
-    int? correctAnswers,
-    int? wrongAnswers,
+    List<String>? correctAnswers,
+    List<String>? wrongAnswers,
   }) =>
       TrainingProccess(
         counter: counter ?? this.counter,

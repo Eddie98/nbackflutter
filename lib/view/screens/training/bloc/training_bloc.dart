@@ -18,19 +18,26 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
       list.last == list.reversed.elementAt(2);
 
   void trainingEventHandler(event, emit) {
+    final correctAnswersClone = [...state.correctAnswers];
+    final wrongAnswersClone = [...state.wrongAnswers];
+
     if (event is TrainingInitialEvent) emit(const TrainingProccess());
 
     if (state.colors.length > 2 && state.positions.length > 2) {
       if (event is TrainingColorBtnClickEvent) {
         if (checkLastAndTwoPosBackEquality(state.colors)) {
+          correctAnswersClone.add(colorSign);
+
           emit(state.copyWith(
             isColorBtnDisabled: true,
-            correctAnswers: state.correctAnswers + 1,
+            correctAnswers: correctAnswersClone,
           ));
         } else {
+          wrongAnswersClone.add(colorSign);
+
           emit(state.copyWith(
             isColorBtnDisabled: true,
-            wrongAnswers: state.wrongAnswers + 1,
+            wrongAnswers: wrongAnswersClone,
           ));
         }
         isColorBtnClicked = true;
@@ -38,29 +45,35 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
 
       if (event is TrainingPositionBtnClickEvent) {
         if (checkLastAndTwoPosBackEquality(state.positions)) {
+          correctAnswersClone.add(positionSign);
+
           emit(state.copyWith(
             isPositionBtnDisabled: true,
-            correctAnswers: state.correctAnswers + 1,
+            correctAnswers: correctAnswersClone,
           ));
         } else {
+          wrongAnswersClone.add(positionSign);
+
           emit(state.copyWith(
             isPositionBtnDisabled: true,
-            wrongAnswers: state.wrongAnswers + 1,
+            wrongAnswers: wrongAnswersClone,
           ));
         }
         isPositionBtnClicked = true;
       }
     } else {
       if (event is TrainingColorBtnClickEvent) {
+        wrongAnswersClone.add(colorSign);
         emit(state.copyWith(
           isColorBtnDisabled: true,
-          wrongAnswers: state.wrongAnswers + 1,
+          wrongAnswers: wrongAnswersClone,
         ));
       }
       if (event is TrainingPositionBtnClickEvent) {
+        wrongAnswersClone.add(positionSign);
         emit(state.copyWith(
           isPositionBtnDisabled: true,
-          wrongAnswers: state.wrongAnswers + 1,
+          wrongAnswers: wrongAnswersClone,
         ));
       }
     }
@@ -69,17 +82,15 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
       final stateColors = [...state.colors];
       final statePositions = [...state.positions];
 
-      int wrongAnswersIncrement = 0;
-
       if (event.isPause) {
         if (stateColors.length > 2 && statePositions.length > 2) {
           if (checkLastAndTwoPosBackEquality(stateColors) &&
               !isColorBtnClicked) {
-            wrongAnswersIncrement += 1;
+            wrongAnswersClone.add(colorSign);
           }
           if (checkLastAndTwoPosBackEquality(statePositions) &&
               !isPositionBtnClicked) {
-            wrongAnswersIncrement += 1;
+            wrongAnswersClone.add(positionSign);
           }
         }
       }
@@ -102,7 +113,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
         isPause: event.isPause,
         isColorBtnDisabled: event.isPause && isColorBtnClicked,
         isPositionBtnDisabled: event.isPause && isPositionBtnClicked,
-        wrongAnswers: state.wrongAnswers + wrongAnswersIncrement,
+        wrongAnswers: wrongAnswersClone,
       ));
 
       isColorBtnClicked = false;

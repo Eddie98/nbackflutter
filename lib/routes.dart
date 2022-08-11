@@ -9,12 +9,6 @@ class Routes {
   static const String trainingLink = '/training';
   static const String resultsLink = '/results';
 
-  static Map<String, WidgetBuilder> routesMap = {
-    introdutionLink: (context) => const IntrodutionScreen(),
-    trainingLink: (context) => const TrainingScreen(),
-    resultsLink: (context) => const ResultsScreen(),
-  };
-
   static Route<T> fadeThrough<T>(
     RouteSettings settings,
     WidgetBuilder page, {
@@ -32,10 +26,16 @@ class Routes {
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
     return fadeThrough(settings, (context) {
-      for (var entry in routesMap.entries) {
-        if (settings.name == entry.key) return entry.value(context);
+      if (settings.name == introdutionLink) {
+        return const IntrodutionScreen();
       }
-      return const SizedBox.shrink();
+      if (settings.name == trainingLink) {
+        return const TrainingScreen();
+      }
+      if (settings.name == resultsLink) {
+        return ResultsScreen(settings.arguments as List<List<String>>);
+      }
+      return const IntrodutionScreen();
     });
   }
 }
