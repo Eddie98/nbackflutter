@@ -14,6 +14,15 @@ const resultsNotbadCanMore = 'Неплохо! Можно лучше!';
 const resultsGoodButMore = 'Очень хорошо! Но можно еще лучше!';
 const resultsExcellent = 'Отлично! Превосходно!';
 
+const settingsText = 'Настройки';
+const totalAttemptsText = 'Всего попыток';
+const intervalBetweenAttemptsText = 'Интервал между попытками';
+const nBackValueText = 'Значение N-назад';
+const clickToChangeText = 'Нажмите чтобы изменить';
+const attemptsText = 'попыток';
+const secondsText = 'сек.';
+const itemsbackText = 'элемент(ов) назад';
+
 const mainTitle = 'Задача на внимание';
 const mainDescription = '''
 Это упражнение тренирует внимание

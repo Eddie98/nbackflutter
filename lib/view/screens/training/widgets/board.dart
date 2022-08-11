@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nbackflutter/constants/app_colors.dart';
 import 'package:nbackflutter/constants/app_constants.dart';
 import 'package:nbackflutter/utils/index.dart';
 
@@ -57,7 +58,7 @@ class _GridItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromRGBO(224, 224, 224, 1),
+      color: AppColors.mainGreyColor,
       child: index == 4 ? const _CrossWidget() : _ColorsWidget(color: color),
     );
   }
@@ -76,7 +77,7 @@ class _CrossWidget extends StatelessWidget {
             child: Container(
               width: double.infinity,
               height: 1.0,
-              color: const Color.fromRGBO(0, 0, 0, 1),
+              color: AppColors.mainBlackColor,
             ),
           ),
           Positioned(
@@ -85,7 +86,7 @@ class _CrossWidget extends StatelessWidget {
               child: Container(
                 width: double.infinity,
                 height: 1.0,
-                color: const Color.fromRGBO(0, 0, 0, 1),
+                color: AppColors.mainBlackColor,
               ),
             ),
           ),

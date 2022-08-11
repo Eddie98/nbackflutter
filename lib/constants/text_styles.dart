@@ -16,4 +16,9 @@ class TextStyles {
         fontSize: getAdaptiveFontSize(17.0),
         fontWeight: FontWeight.w600,
       );
+  static TextStyle settingsPageTS() => TextStyle(
+        color: Colors.white,
+        fontSize: getAdaptiveFontSize(17.0),
+        fontWeight: FontWeight.w500,
+      );
 }

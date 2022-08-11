@@ -10,8 +10,8 @@ class Routes {
   static const String resultsLink = '/results';
 
   static Route<T> fadeThrough<T>(
-    RouteSettings settings,
     WidgetBuilder page, {
+    RouteSettings? settings,
     int duration = 300,
   }) {
     return PageRouteBuilder<T>(
@@ -25,7 +25,7 @@ class Routes {
   }
 
   static Route<dynamic>? onGenerateRoute(RouteSettings settings) {
-    return fadeThrough(settings, (context) {
+    return fadeThrough((context) {
       if (settings.name == introdutionLink) {
         return const IntrodutionScreen();
       }
@@ -36,6 +36,6 @@ class Routes {
         return ResultsScreen(settings.arguments as List<List<String>>);
       }
       return const IntrodutionScreen();
-    });
+    }, settings: settings);
   }
 }

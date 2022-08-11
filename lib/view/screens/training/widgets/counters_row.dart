@@ -16,21 +16,21 @@ class CountersRowWidget extends StatelessWidget {
           allText,
           state.counter,
           TextStyles.allColorPositionTS().copyWith(
-            color: const Color.fromRGBO(224, 224, 224, 1),
+            color: AppColors.mainGreyColor,
           ),
         ),
         _CounterWidget(
           correctText,
           state.correctAnswers.length,
           TextStyles.allColorPositionTS().copyWith(
-            color: const Color.fromRGBO(76, 175, 80, 1),
+            color: AppColors.mainGreenColor,
           ),
         ),
         _CounterWidget(
           wrongText,
           state.wrongAnswers.length,
           TextStyles.allColorPositionTS().copyWith(
-            color: const Color.fromRGBO(244, 67, 54, 1),
+            color: AppColors.mainRedColor,
           ),
         ),
       ],

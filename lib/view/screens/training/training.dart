@@ -54,10 +54,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        leading: IconButton(
-          onPressed: () => Navigator.pop(context),
-          iconSize: getPropScreenWidth(26.0),
-          icon: const Icon(Icons.arrow_back),
+        leading: ArrowBackBtnWidget(
+          () => Navigator.of(context).pop(),
         ),
         actions: [
           const SettingsButton(),
