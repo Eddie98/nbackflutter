@@ -40,44 +40,47 @@ class SettingsPage extends StatelessWidget {
           leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
           title: const Text(settingsText),
         ),
-        body: BlocBuilder<SettingsBloc, SettingsMainState>(
+        body: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
-            return Column(
-              children: [
-                ListItemWidget(
-                  title: totalAttemptsText,
-                  subTitle: '${state.totalAttempts} $attemptsText. ',
-                  onTap: () => showAlertDialog(
-                    context: context,
-                    options: totalAttemptsOptions,
-                    selectedOption: state.totalAttempts,
-                    root: 0,
+            if (state is SettingsMainState) {
+              return Column(
+                children: [
+                  ListItemWidget(
+                    title: totalAttemptsText,
+                    subTitle: '${state.totalAttempts} $attemptsText. ',
+                    onTap: () => showAlertDialog(
+                      context: context,
+                      options: totalAttemptsOptions,
+                      selectedOption: state.totalAttempts,
+                      root: 0,
+                    ),
                   ),
-                ),
-                ListItemWidget(
-                  title: intervalBetweenAttemptsText,
-                  subTitle:
-                      '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
-                  onTap: () => showAlertDialog(
-                    context: context,
-                    options: intervalBetweenAttemptsOptions,
-                    selectedOption: state.intervalBetweenAttempts,
-                    root: 1,
+                  ListItemWidget(
+                    title: intervalBetweenAttemptsText,
+                    subTitle:
+                        '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
+                    onTap: () => showAlertDialog(
+                      context: context,
+                      options: intervalBetweenAttemptsOptions,
+                      selectedOption: state.intervalBetweenAttempts,
+                      root: 1,
+                    ),
                   ),
-                ),
-                ListItemWidget(
-                  title: nBackValueText,
-                  subTitle:
-                      '${state.nBackValue} $itemsbackText. $clickToChangeText',
-                  onTap: () => showAlertDialog(
-                    context: context,
-                    options: nBackValueOptions,
-                    selectedOption: state.nBackValue,
-                    root: 2,
+                  ListItemWidget(
+                    title: nBackValueText,
+                    subTitle:
+                        '${state.nBackValue} $itemsbackText. $clickToChangeText',
+                    onTap: () => showAlertDialog(
+                      context: context,
+                      options: nBackValueOptions,
+                      selectedOption: state.nBackValue,
+                      root: 2,
+                    ),
                   ),
-                ),
-              ],
-            );
+                ],
+              );
+            }
+            return const SizedBox.shrink();
           },
         ),
       ),

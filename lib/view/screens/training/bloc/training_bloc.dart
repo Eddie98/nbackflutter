@@ -9,7 +9,7 @@ import '../../../pages/settings/settings_repository.dart';
 part 'training_event.dart';
 part 'training_state.dart';
 
-class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
+class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
   final SettingsRepository _settingsRepo;
 
   bool isColorBtnClicked = false;
@@ -19,8 +19,20 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
     required SettingsRepository settingsRepo,
   })  : _settingsRepo = settingsRepo,
         super(const TrainingProccess()) {
-    on<TrainingEvent>(
-      trainingEventHandler,
+    on<TrainingInitialEvent>(
+      trainingInitialEventHandler,
+      transformer: sequential(),
+    );
+    on<TrainingStartEvent>(
+      trainingStartEventHandler,
+      transformer: sequential(),
+    );
+    on<TrainingColorBtnClickEvent>(
+      trainingColorBtnClickEventHandler,
+      transformer: sequential(),
+    );
+    on<TrainingPositionBtnClickEvent>(
+      trainingPositionBtnClickEventHandler,
       transformer: sequential(),
     );
   }
@@ -28,15 +40,17 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
   bool checkLastAndTwoPosBackEquality(List list) =>
       list.last == list.reversed.elementAt(_settingsRepo.nBackValue);
 
-  void trainingEventHandler(event, emit) {
-    final correctAnswersClone = [...state.correctAnswers];
-    final wrongAnswersClone = [...state.wrongAnswers];
+  void trainingInitialEventHandler(event, emit) =>
+      emit(const TrainingProccess());
 
-    if (event is TrainingInitialEvent) emit(const TrainingProccess());
+  void trainingColorBtnClickEventHandler(event, emit) {
+    final state = this.state;
 
-    if (state.colors.length > _settingsRepo.nBackValue &&
-        state.positions.length > _settingsRepo.nBackValue) {
-      if (event is TrainingColorBtnClickEvent) {
+    if (state is TrainingProccess) {
+      final correctAnswersClone = [...state.correctAnswers];
+      final wrongAnswersClone = [...state.wrongAnswers];
+
+      if (state.colors.length > _settingsRepo.nBackValue) {
         if (checkLastAndTwoPosBackEquality(state.colors)) {
           correctAnswersClone.add(colorSign);
 
@@ -53,9 +67,25 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
           ));
         }
         isColorBtnClicked = true;
+      } else {
+        wrongAnswersClone.add(colorSign);
+        emit(state.copyWith(
+          isColorBtnDisabled: true,
+          wrongAnswers: wrongAnswersClone,
+        ));
+        isColorBtnClicked = true;
       }
+    }
+  }
 
-      if (event is TrainingPositionBtnClickEvent) {
+  void trainingPositionBtnClickEventHandler(event, emit) {
+    final state = this.state;
+
+    if (state is TrainingProccess) {
+      final correctAnswersClone = [...state.correctAnswers];
+      final wrongAnswersClone = [...state.wrongAnswers];
+
+      if (state.positions.length > _settingsRepo.nBackValue) {
         if (checkLastAndTwoPosBackEquality(state.positions)) {
           correctAnswersClone.add(positionSign);
 
@@ -72,17 +102,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
           ));
         }
         isPositionBtnClicked = true;
-      }
-    } else {
-      if (event is TrainingColorBtnClickEvent) {
-        wrongAnswersClone.add(colorSign);
-        emit(state.copyWith(
-          isColorBtnDisabled: true,
-          wrongAnswers: wrongAnswersClone,
-        ));
-        isColorBtnClicked = true;
-      }
-      if (event is TrainingPositionBtnClickEvent) {
+      } else {
         wrongAnswersClone.add(positionSign);
         emit(state.copyWith(
           isPositionBtnDisabled: true,
@@ -91,8 +111,14 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
         isPositionBtnClicked = true;
       }
     }
+  }
 
-    if (event is TrainingStartEvent) {
+  void trainingStartEventHandler(event, emit) {
+    final state = this.state;
+
+    if (state is TrainingProccess) {
+      final wrongAnswersClone = [...state.wrongAnswers];
+
       final stateColors = [...state.colors];
       final statePositions = [...state.positions];
 

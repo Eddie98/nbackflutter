@@ -7,10 +7,6 @@ abstract class TrainingState extends Equatable {
   List<Object> get props => [];
 }
 
-class TrainingInitial extends TrainingState {
-  const TrainingInitial();
-}
-
 class TrainingProccess extends TrainingState {
   final int counter;
   final bool isPause;

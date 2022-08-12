@@ -6,18 +6,20 @@ import '../settings_repository.dart';
 part 'settings_event.dart';
 part 'settings_state.dart';
 
-class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsMainState> {
+class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
   final SettingsRepository _settingsRepo;
 
   SettingsBloc({
     required SettingsRepository settingsRepo,
   })  : _settingsRepo = settingsRepo,
         super(const SettingsMainState()) {
-    on<SettingsEvent>(settingsEventHandler);
+    on<SettingsChangeEvent>(settingsChangeEventHandler);
   }
 
-  void settingsEventHandler(event, emit) {
-    if (event is SettingsChangeEvent) {
+  void settingsChangeEventHandler(event, emit) {
+    final state = this.state;
+
+    if (state is SettingsMainState) {
       emit(state.copyWith(
         totalAttempts: event.totalAttemptsOption,
         intervalBetweenAttempts: event.intervalBetweenAttemptsOption,
@@ -45,10 +47,13 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsMainState> {
 
   @override
   Map<String, dynamic>? toJson(state) {
-    _settingsRepo.totalAttempts = state.totalAttempts;
-    _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
-    _settingsRepo.nBackValue = state.nBackValue;
+    if (state is SettingsMainState) {
+      _settingsRepo.totalAttempts = state.totalAttempts;
+      _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
+      _settingsRepo.nBackValue = state.nBackValue;
 
-    return state.toMap();
+      return state.toMap();
+    }
+    return null;
   }
 }
