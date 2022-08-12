@@ -61,7 +61,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
           () => Navigator.pop(context),
         ),
         actions: [
-          const SettingsButton(),
+          const SettingsButton(isFromTrainingScreen: true),
           sizedBoxWidth(defaultHorPadding),
         ],
         title: const Text(trainingAppbarText),

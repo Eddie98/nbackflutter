@@ -5,15 +5,34 @@ import 'package:nbackflutter/utils/index.dart';
 import '../pages/settings/settings.dart';
 
 class SettingsButton extends StatelessWidget {
-  const SettingsButton({Key? key}) : super(key: key);
+  final bool isFromTrainingScreen;
+
+  const SettingsButton({
+    Key? key,
+    this.isFromTrainingScreen = false,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return IconButton(
       onPressed: () {
-        Navigator.of(context).push(
-          Routes.fadeThrough((context) => const SettingsPage()),
-        );
+        if (isFromTrainingScreen) {
+          Navigator.of(context).pushReplacement(
+            Routes.fadeThrough(
+              (context) => SettingsPage(
+                isFromTrainingScreen: isFromTrainingScreen,
+              ),
+            ),
+          );
+        } else {
+          Navigator.of(context).push(
+            Routes.fadeThrough(
+              (context) => SettingsPage(
+                isFromTrainingScreen: isFromTrainingScreen,
+              ),
+            ),
+          );
+        }
       },
       iconSize: getPropScreenWidth(26.0),
       padding: EdgeInsets.zero,

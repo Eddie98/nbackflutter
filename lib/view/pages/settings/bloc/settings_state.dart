@@ -18,23 +18,29 @@ class SettingsMainState extends SettingsState {
     this.nBackValue = 2,
   });
 
-  Map<String, dynamic> toMap() {
-    return {
-      'totalAttempts': totalAttempts,
-      'intervalBetweenAttempts': intervalBetweenAttempts,
-      'nBackValue': nBackValue,
-    };
-  }
+  Map<String, dynamic> toMap() => {
+        'totalAttempts': totalAttempts,
+        'intervalBetweenAttempts': intervalBetweenAttempts,
+        'nBackValue': nBackValue,
+      };
 
   SettingsMainState copyWith({
     int? totalAttempts,
     int? intervalBetweenAttempts,
     int? nBackValue,
-  }) =>
-      SettingsMainState(
-        totalAttempts: totalAttempts ?? this.totalAttempts,
-        intervalBetweenAttempts:
-            intervalBetweenAttempts ?? this.intervalBetweenAttempts,
-        nBackValue: nBackValue ?? this.nBackValue,
-      );
+  }) {
+    return SettingsMainState(
+      totalAttempts: totalAttempts ?? this.totalAttempts,
+      intervalBetweenAttempts:
+          intervalBetweenAttempts ?? this.intervalBetweenAttempts,
+      nBackValue: nBackValue ?? this.nBackValue,
+    );
+  }
+
+  @override
+  List<Object> get props => [
+        totalAttempts,
+        intervalBetweenAttempts,
+        nBackValue,
+      ];
 }

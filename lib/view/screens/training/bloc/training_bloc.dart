@@ -22,15 +22,17 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
   }
 
   bool checkLastAndTwoPosBackEquality(List list) =>
-      list.last == list.reversed.elementAt(2);
+      list.last == list.reversed.elementAt(_settingsRepo.nBackValue);
 
+  // TODO: On Start quickly tap footer button work not correct
   void trainingEventHandler(event, emit) {
     final correctAnswersClone = [...state.correctAnswers];
     final wrongAnswersClone = [...state.wrongAnswers];
 
     if (event is TrainingInitialEvent) emit(const TrainingProccess());
 
-    if (state.colors.length > 2 && state.positions.length > 2) {
+    if (state.colors.length > _settingsRepo.nBackValue &&
+        state.positions.length > _settingsRepo.nBackValue) {
       if (event is TrainingColorBtnClickEvent) {
         if (checkLastAndTwoPosBackEquality(state.colors)) {
           correctAnswersClone.add(colorSign);
@@ -90,7 +92,8 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
       final statePositions = [...state.positions];
 
       if (event.isPause) {
-        if (stateColors.length > 2 && statePositions.length > 2) {
+        if (stateColors.length > _settingsRepo.nBackValue &&
+            statePositions.length > _settingsRepo.nBackValue) {
           if (checkLastAndTwoPosBackEquality(stateColors) &&
               !isColorBtnClicked) {
             wrongAnswersClone.add(colorSign);

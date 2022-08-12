@@ -18,7 +18,11 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsMainState> {
 
   void settingsEventHandler(event, emit) {
     if (event is SettingsChangeEvent) {
-      //  emit(state.copyWith());
+      emit(state.copyWith(
+        totalAttempts: event.totalAttemptsOption,
+        intervalBetweenAttempts: event.intervalBetweenAttemptsOption,
+        nBackValue: event.nBackValueOption,
+      ));
     }
   }
 
@@ -40,5 +44,11 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsMainState> {
   }
 
   @override
-  Map<String, dynamic>? toJson(state) => state.toMap();
+  Map<String, dynamic>? toJson(state) {
+    _settingsRepo.totalAttempts = state.totalAttempts;
+    _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
+    _settingsRepo.nBackValue = state.nBackValue;
+
+    return state.toMap();
+  }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
+import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
@@ -9,7 +10,12 @@ import 'widgets/dialog.dart';
 import 'widgets/list_item.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  final bool isFromTrainingScreen;
+
+  const SettingsPage({
+    Key? key,
+    required this.isFromTrainingScreen,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +25,12 @@ class SettingsPage extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        leading: ArrowBackBtnWidget(
-          () => Navigator.pop(context),
-        ),
+        leading: ArrowBackBtnWidget(() {
+          Navigator.pop(context);
+          if (isFromTrainingScreen) {
+            Navigator.of(context).pushNamed(Routes.trainingLink);
+          }
+        }),
         title: const Text(settingsText),
       ),
       body: BlocBuilder<SettingsBloc, SettingsMainState>(

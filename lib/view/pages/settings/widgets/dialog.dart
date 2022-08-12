@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/utils/index.dart';
+
+import '../bloc/settings_bloc.dart';
 
 void showAlertDialog({
   required BuildContext context,
@@ -41,7 +44,22 @@ void showAlertDialog({
               final isSelected = option == selectedOption;
 
               return ListTile(
-                onTap: () {},
+                onTap: () {
+                  late SettingsChangeEvent event;
+
+                  if (root == 0) {
+                    event = SettingsChangeEvent(totalAttemptsOption: option);
+                  } else if (root == 1) {
+                    event = SettingsChangeEvent(
+                      intervalBetweenAttemptsOption: option,
+                    );
+                  } else {
+                    event = SettingsChangeEvent(nBackValueOption: option);
+                  }
+
+                  context.read<SettingsBloc>().add(event);
+                  Navigator.pop(context);
+                },
                 minLeadingWidth: defaultHorPadding,
                 title: Text(
                   '$option $additionalText',
