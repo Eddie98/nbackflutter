@@ -18,13 +18,16 @@ class FooterButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: getPropScreenWidth(6.0)),
+        padding: EdgeInsets.symmetric(vertical: getPropScreenWidth(0.0)),
         child: ElevatedButton(
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
-            fixedSize: Size(50, getPropScreenWidth(54.0)),
+            fixedSize: Size(50, getPropScreenWidth(60.0)),
             textStyle: TextStyles.trainingFooterButtonsTS(),
             primary: AppColors.themeColor,
+            shape: const RoundedRectangleBorder(
+              borderRadius: BorderRadius.zero,
+            ),
           ),
           child: Text(text.toUpperCase()),
         ),

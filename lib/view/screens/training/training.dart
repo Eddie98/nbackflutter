@@ -29,6 +29,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     trainingBloc = context.read<TrainingBloc>();
     settingsRepo = context.read<SettingsRepository>();
 
+    // TODO: too long duration before start on high interval
     trainingBloc.add(const TrainingInitialEvent());
     Timer.periodic(
       Duration(seconds: settingsRepo.intervalBetweenAttempts),

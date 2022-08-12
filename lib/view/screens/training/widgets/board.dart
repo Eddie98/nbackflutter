@@ -18,7 +18,7 @@ class BoardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const spacingsHeight = 66.0; // bottom spacing absent - 26.0 - if overflow.
-    const countersHeight = 25.0;
+    const countersHeight = 23.0;
     final itemHeight = (bodyHeight - spacingsHeight - countersHeight) / 3;
 
     return Expanded(
