@@ -7,6 +7,9 @@ const allText = 'Всего';
 const correctText = 'Верно';
 const wrongText = 'Неверно';
 
+const cancelText = 'Отмена';
+const chooseOptionsText = 'Выберите настройки';
+
 const resultsYourResults = 'Ваши результаты';
 const resultsTryMore = 'Попробуйте еще раз!';
 const resultsNotGoodEnoughCanMore = 'Не очень... Можно лучше!';

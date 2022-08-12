@@ -3,14 +3,21 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 
+import '../../../pages/settings/settings_repository.dart';
+
 part 'training_event.dart';
 part 'training_state.dart';
 
 class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
+  final SettingsRepository _settingsRepo;
+
   bool isColorBtnClicked = false;
   bool isPositionBtnClicked = false;
 
-  TrainingBloc() : super(const TrainingProccess()) {
+  TrainingBloc({
+    required SettingsRepository settingsRepo,
+  })  : _settingsRepo = settingsRepo,
+        super(const TrainingProccess()) {
     on<TrainingEvent>(trainingEventHandler);
   }
 

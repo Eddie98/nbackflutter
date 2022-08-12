@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 
 const double defaultHorPadding = 16.0;
 
-const int statePersistSecondsDuration = 1;
-const int counterMaxLimit = 25;
+// const int intervalBetweenAttemptsDuration = 2;
+// const int counterMaxLimit = 25;
+
+const totalAttemptsOptions = [25, 50, 75, 100];
+const intervalBetweenAttemptsOptions = [2, 3, 4, 5, 6, 7];
+const nBackValueOptions = [2, 3, 4];
 
 const String colorSign = 'c';
 const String positionSign = 'p';

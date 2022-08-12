@@ -7,6 +7,7 @@ import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
+import '../../pages/settings/settings_repository.dart';
 import 'bloc/training_bloc.dart';
 import 'widgets/board.dart';
 import 'widgets/counters_row.dart';
@@ -21,16 +22,18 @@ class TrainingScreen extends StatefulWidget {
 
 class _TrainingScreenState extends State<TrainingScreen> {
   late TrainingBloc trainingBloc;
+  late SettingsRepository settingsRepo;
 
   @override
   void initState() {
     trainingBloc = context.read<TrainingBloc>();
+    settingsRepo = context.read<SettingsRepository>();
 
     trainingBloc.add(const TrainingInitialEvent());
     Timer.periodic(
-      const Duration(seconds: statePersistSecondsDuration + 1),
+      Duration(seconds: settingsRepo.intervalBetweenAttempts),
       (Timer timer) {
-        if (mounted && timer.tick <= counterMaxLimit + 1) {
+        if (mounted && timer.tick <= settingsRepo.totalAttempts + 1) {
           timerCallback(timer.tick);
         }
       },
@@ -42,7 +45,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
   void timerCallback(int tick) async {
     trainingBloc.add(TrainingStartEvent(tick, isPause: false));
     await Future.delayed(
-      const Duration(seconds: statePersistSecondsDuration),
+      Duration(seconds: settingsRepo.intervalBetweenAttempts - 1),
     );
     trainingBloc.add(TrainingStartEvent(tick, isPause: true));
   }
@@ -55,7 +58,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         leading: ArrowBackBtnWidget(
-          () => Navigator.of(context).pop(),
+          () => Navigator.pop(context),
         ),
         actions: [
           const SettingsButton(),
@@ -94,7 +97,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
           builder: (context, constraints) {
             return BlocConsumer<TrainingBloc, TrainingProccess>(
               listenWhen: (oldState, newState) =>
-                  newState.counter > counterMaxLimit,
+                  newState.counter > settingsRepo.totalAttempts,
               listener: (context, state) {
                 Navigator.of(context).pushReplacementNamed(
                   Routes.resultsLink,
@@ -102,7 +105,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 );
               },
               buildWhen: (oldState, newState) =>
-                  newState.counter <= counterMaxLimit,
+                  newState.counter <= settingsRepo.totalAttempts,
               builder: (context, state) {
                 return Column(
                   children: [

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
+import 'bloc/settings_bloc.dart';
+import 'widgets/dialog.dart';
 import 'widgets/list_item.dart';
 
 class SettingsPage extends StatelessWidget {
@@ -17,28 +20,49 @@ class SettingsPage extends StatelessWidget {
         automaticallyImplyLeading: false,
         centerTitle: true,
         leading: ArrowBackBtnWidget(
-          () => Navigator.of(context).pop(),
+          () => Navigator.pop(context),
         ),
         title: const Text(settingsText),
       ),
-      body: Column(
-        children: [
-          ListItemWidget(
-            title: totalAttemptsText,
-            subTitle: '25 $attemptsText. $clickToChangeText',
-            onTap: () {},
-          ),
-          ListItemWidget(
-            title: intervalBetweenAttemptsText,
-            subTitle: '2 $secondsText. $clickToChangeText',
-            onTap: () {},
-          ),
-          ListItemWidget(
-            title: nBackValueText,
-            subTitle: '2 $itemsbackText. $clickToChangeText',
-            onTap: () {},
-          ),
-        ],
+      body: BlocBuilder<SettingsBloc, SettingsMainState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              ListItemWidget(
+                title: totalAttemptsText,
+                subTitle: '${state.totalAttempts} $attemptsText. ',
+                onTap: () => showAlertDialog(
+                  context: context,
+                  options: totalAttemptsOptions,
+                  selectedOption: state.totalAttempts,
+                  root: 0,
+                ),
+              ),
+              ListItemWidget(
+                title: intervalBetweenAttemptsText,
+                subTitle:
+                    '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
+                onTap: () => showAlertDialog(
+                  context: context,
+                  options: intervalBetweenAttemptsOptions,
+                  selectedOption: state.intervalBetweenAttempts,
+                  root: 1,
+                ),
+              ),
+              ListItemWidget(
+                title: nBackValueText,
+                subTitle:
+                    '${state.nBackValue} $itemsbackText. $clickToChangeText',
+                onTap: () => showAlertDialog(
+                  context: context,
+                  options: nBackValueOptions,
+                  selectedOption: state.nBackValue,
+                  root: 2,
+                ),
+              ),
+            ],
+          );
+        },
       ),
     );
   }
