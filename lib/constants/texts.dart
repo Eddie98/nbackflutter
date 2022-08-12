@@ -1,4 +1,4 @@
-const trainingAppbarText = 'Задача 2-назад';
+String trainingAppbarText(int value) => 'Задача $value-назад';
 
 const categoryText = 'Категория';
 const positionText = 'Позиция';
@@ -8,6 +8,7 @@ const correctText = 'Верно';
 const wrongText = 'Неверно';
 
 const cancelText = 'Отмена';
+const resultsText = 'Результаты';
 const chooseOptionsText = 'Выберите настройки';
 
 const resultsYourResults = 'Ваши результаты';

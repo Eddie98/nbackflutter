@@ -20,7 +20,7 @@ class IntrodutionScreen extends StatelessWidget {
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: size.height * .20,
+            expandedHeight: size.height * .24,
             automaticallyImplyLeading: false,
             actions: [
               const SettingsButton(),

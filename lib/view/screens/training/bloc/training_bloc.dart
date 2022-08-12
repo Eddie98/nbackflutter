@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
@@ -18,13 +19,15 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
     required SettingsRepository settingsRepo,
   })  : _settingsRepo = settingsRepo,
         super(const TrainingProccess()) {
-    on<TrainingEvent>(trainingEventHandler);
+    on<TrainingEvent>(
+      trainingEventHandler,
+      transformer: sequential(),
+    );
   }
 
   bool checkLastAndTwoPosBackEquality(List list) =>
       list.last == list.reversed.elementAt(_settingsRepo.nBackValue);
 
-  // TODO: On Start quickly tap footer button work not correct
   void trainingEventHandler(event, emit) {
     final correctAnswersClone = [...state.correctAnswers];
     final wrongAnswersClone = [...state.wrongAnswers];
@@ -77,6 +80,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
           isColorBtnDisabled: true,
           wrongAnswers: wrongAnswersClone,
         ));
+        isColorBtnClicked = true;
       }
       if (event is TrainingPositionBtnClickEvent) {
         wrongAnswersClone.add(positionSign);
@@ -84,6 +88,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
           isPositionBtnDisabled: true,
           wrongAnswers: wrongAnswersClone,
         ));
+        isPositionBtnClicked = true;
       }
     }
 
@@ -103,9 +108,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingProccess> {
             wrongAnswersClone.add(positionSign);
           }
         }
-      }
-
-      if (!event.isPause) {
+      } else {
         final constColors = [...listOfColorsForRandomSelection];
         final constPositions = [...listOfPositionsForRandomSelection];
 

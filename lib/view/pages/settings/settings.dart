@@ -17,61 +17,69 @@ class SettingsPage extends StatelessWidget {
     required this.isFromTrainingScreen,
   }) : super(key: key);
 
+  void _backBtnHandle(BuildContext context) {
+    Navigator.pop(context);
+    if (isFromTrainingScreen) {
+      Navigator.of(context).pushNamed(Routes.trainingLink);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        centerTitle: true,
-        leading: ArrowBackBtnWidget(() {
-          Navigator.pop(context);
-          if (isFromTrainingScreen) {
-            Navigator.of(context).pushNamed(Routes.trainingLink);
-          }
-        }),
-        title: const Text(settingsText),
-      ),
-      body: BlocBuilder<SettingsBloc, SettingsMainState>(
-        builder: (context, state) {
-          return Column(
-            children: [
-              ListItemWidget(
-                title: totalAttemptsText,
-                subTitle: '${state.totalAttempts} $attemptsText. ',
-                onTap: () => showAlertDialog(
-                  context: context,
-                  options: totalAttemptsOptions,
-                  selectedOption: state.totalAttempts,
-                  root: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        _backBtnHandle(context);
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
+          title: const Text(settingsText),
+        ),
+        body: BlocBuilder<SettingsBloc, SettingsMainState>(
+          builder: (context, state) {
+            return Column(
+              children: [
+                ListItemWidget(
+                  title: totalAttemptsText,
+                  subTitle: '${state.totalAttempts} $attemptsText. ',
+                  onTap: () => showAlertDialog(
+                    context: context,
+                    options: totalAttemptsOptions,
+                    selectedOption: state.totalAttempts,
+                    root: 0,
+                  ),
                 ),
-              ),
-              ListItemWidget(
-                title: intervalBetweenAttemptsText,
-                subTitle:
-                    '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
-                onTap: () => showAlertDialog(
-                  context: context,
-                  options: intervalBetweenAttemptsOptions,
-                  selectedOption: state.intervalBetweenAttempts,
-                  root: 1,
+                ListItemWidget(
+                  title: intervalBetweenAttemptsText,
+                  subTitle:
+                      '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
+                  onTap: () => showAlertDialog(
+                    context: context,
+                    options: intervalBetweenAttemptsOptions,
+                    selectedOption: state.intervalBetweenAttempts,
+                    root: 1,
+                  ),
                 ),
-              ),
-              ListItemWidget(
-                title: nBackValueText,
-                subTitle:
-                    '${state.nBackValue} $itemsbackText. $clickToChangeText',
-                onTap: () => showAlertDialog(
-                  context: context,
-                  options: nBackValueOptions,
-                  selectedOption: state.nBackValue,
-                  root: 2,
+                ListItemWidget(
+                  title: nBackValueText,
+                  subTitle:
+                      '${state.nBackValue} $itemsbackText. $clickToChangeText',
+                  onTap: () => showAlertDialog(
+                    context: context,
+                    options: nBackValueOptions,
+                    selectedOption: state.nBackValue,
+                    root: 2,
+                  ),
                 ),
-              ),
-            ],
-          );
-        },
+              ],
+            );
+          },
+        ),
       ),
     );
   }

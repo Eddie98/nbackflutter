@@ -43,7 +43,7 @@ class ResultsScreen extends StatelessWidget {
         leading: ArrowBackBtnWidget(
           () => Navigator.of(context).pushReplacementNamed(Routes.trainingLink),
         ),
-        title: const Text(trainingAppbarText),
+        title: const Text(resultsText),
       ),
       body: Center(
         child: Column(
