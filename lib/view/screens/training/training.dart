@@ -30,24 +30,32 @@ class _TrainingScreenState extends State<TrainingScreen> {
     settingsRepo = context.read<SettingsRepository>();
 
     trainingBloc.add(const TrainingInitialEvent());
-    Timer.periodic(
-      Duration(seconds: settingsRepo.intervalBetweenAttempts),
-      (Timer timer) {
-        if (mounted && timer.tick <= settingsRepo.totalAttempts + 1) {
-          timerCallback(timer.tick);
-        }
-      },
-    );
+    Future.delayed(const Duration(seconds: initialSecondsDelay), () {
+      timerCallback(1);
+      Timer.periodic(
+        Duration(seconds: settingsRepo.intervalBetweenAttempts),
+        (Timer timer) {
+          final tick = timer.tick + 1;
+          if (mounted && tick <= settingsRepo.totalAttempts + 1) {
+            timerCallback(tick);
+          }
+        },
+      );
+    });
 
     super.initState();
   }
 
   void timerCallback(int tick) async {
+    final isNotLastTick = tick <= settingsRepo.totalAttempts;
+
     trainingBloc.add(TrainingStartEvent(tick, isPause: false));
-    await Future.delayed(
-      Duration(seconds: settingsRepo.intervalBetweenAttempts - 1),
-    );
-    trainingBloc.add(TrainingStartEvent(tick, isPause: true));
+    if (isNotLastTick) {
+      await Future.delayed(
+        Duration(seconds: settingsRepo.intervalBetweenAttempts - 1),
+      );
+      trainingBloc.add(TrainingStartEvent(tick, isPause: true));
+    }
   }
 
   @override

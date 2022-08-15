@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 const double defaultHorPadding = 16.0;
-
-// const int intervalBetweenAttemptsDuration = 2;
-// const int counterMaxLimit = 25;
+const int initialSecondsDelay = 1;
 
 const totalAttemptsOptions = [25, 50, 75, 100];
 const intervalBetweenAttemptsOptions = [2, 3, 4, 5, 6, 7];

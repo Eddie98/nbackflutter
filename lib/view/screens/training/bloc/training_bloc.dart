@@ -122,7 +122,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       final stateColors = [...state.colors];
       final statePositions = [...state.positions];
 
-      if (event.isPause) {
+      if (!event.isPause) {
         if (stateColors.length > _settingsRepo.nBackValue &&
             statePositions.length > _settingsRepo.nBackValue) {
           if (checkLastAndTwoPosBackEquality(stateColors) &&
@@ -134,7 +134,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
             wrongAnswersClone.add(positionSign);
           }
         }
-      } else {
+
         final constColors = [...listOfColorsForRandomSelection];
         final constPositions = [...listOfPositionsForRandomSelection];
 
@@ -155,8 +155,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
         wrongAnswers: wrongAnswersClone,
       ));
 
-      isColorBtnClicked = false;
-      isPositionBtnClicked = false;
+      if (!event.isPause) {
+        isColorBtnClicked = false;
+        isPositionBtnClicked = false;
+      }
     }
   }
 }

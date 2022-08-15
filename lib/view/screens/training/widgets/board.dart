@@ -104,7 +104,7 @@ class _ColorsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(getPropScreenWidth(6.0)),
+      margin: EdgeInsets.all(getPropScreenWidth(3.0)),
       color: color,
     );
   }

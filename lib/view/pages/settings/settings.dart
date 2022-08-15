@@ -17,11 +17,12 @@ class SettingsPage extends StatelessWidget {
     required this.isFromTrainingScreen,
   }) : super(key: key);
 
-  void _backBtnHandle(BuildContext context) {
+  Future<bool> _backBtnHandle(BuildContext context) {
     Navigator.pop(context);
     if (isFromTrainingScreen) {
       Navigator.of(context).pushNamed(Routes.trainingLink);
     }
+    return Future.value(false);
   }
 
   @override
@@ -29,10 +30,7 @@ class SettingsPage extends StatelessWidget {
     SizeConfig().init(context);
 
     return WillPopScope(
-      onWillPop: () async {
-        _backBtnHandle(context);
-        return false;
-      },
+      onWillPop: () => _backBtnHandle(context),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,

@@ -25,11 +25,11 @@ class ResultsScreen extends StatelessWidget {
 
     late String comment;
 
-    if (percent > 30 && percent < 50) {
+    if (percent > 30 && percent <= 50) {
       comment = resultsNotGoodEnoughCanMore;
-    } else if (percent > 50 && percent < 70) {
+    } else if (percent > 50 && percent <= 70) {
       comment = resultsNotbadCanMore;
-    } else if (percent > 70 && percent < 90) {
+    } else if (percent > 70 && percent <= 90) {
       comment = resultsGoodButMore;
     } else if (percent > 90) {
       comment = resultsExcellent;
