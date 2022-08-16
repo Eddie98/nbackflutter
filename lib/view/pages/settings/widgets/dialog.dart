@@ -45,7 +45,7 @@ void showAlertDialog({
 
               return ListTile(
                 onTap: () {
-                  late SettingsChangeEvent event;
+                  late final SettingsChangeEvent event;
 
                   if (root == 0) {
                     event = SettingsChangeEvent(totalAttemptsOption: option);

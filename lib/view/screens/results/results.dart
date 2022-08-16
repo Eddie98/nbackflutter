@@ -23,7 +23,7 @@ class ResultsScreen extends StatelessWidget {
     final int percent = (value * 100).round();
     final percentString = '$percent%';
 
-    late String comment;
+    late final String comment;
 
     if (percent > 30 && percent <= 50) {
       comment = resultsNotGoodEnoughCanMore;

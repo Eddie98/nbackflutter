@@ -21,8 +21,8 @@ class TrainingScreen extends StatefulWidget {
 }
 
 class _TrainingScreenState extends State<TrainingScreen> {
-  late TrainingBloc trainingBloc;
-  late SettingsRepository settingsRepo;
+  late final TrainingBloc trainingBloc;
+  late final SettingsRepository settingsRepo;
 
   @override
   void initState() {

@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
@@ -19,22 +18,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     required SettingsRepository settingsRepo,
   })  : _settingsRepo = settingsRepo,
         super(const TrainingProccess()) {
-    on<TrainingInitialEvent>(
-      trainingInitialEventHandler,
-      transformer: sequential(),
-    );
-    on<TrainingStartEvent>(
-      trainingStartEventHandler,
-      transformer: sequential(),
-    );
-    on<TrainingColorBtnClickEvent>(
-      trainingColorBtnClickEventHandler,
-      transformer: sequential(),
-    );
-    on<TrainingPositionBtnClickEvent>(
-      trainingPositionBtnClickEventHandler,
-      transformer: sequential(),
-    );
+    on<TrainingInitialEvent>(trainingInitialEventHandler);
+    on<TrainingStartEvent>(trainingStartEventHandler);
+    on<TrainingColorBtnClickEvent>(trainingColorBtnClickEventHandler);
+    on<TrainingPositionBtnClickEvent>(trainingPositionBtnClickEventHandler);
   }
 
   bool checkLastAndTwoPosBackEquality(List list) =>
