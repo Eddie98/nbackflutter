@@ -71,6 +71,7 @@ class ResultsScreen extends StatelessWidget {
                 fontWeight: FontWeight.normal,
               ),
             ),
+            sizedBoxHeight(10.0),
             TableWidget(
               correctAll: correctAnswers.length,
               correctColors: correctAnswers.where((e) => e == colorSign).length,

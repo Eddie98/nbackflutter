@@ -45,7 +45,8 @@ class SettingsPage extends StatelessWidget {
                 children: [
                   ListItemWidget(
                     title: totalAttemptsText,
-                    subTitle: '${state.totalAttempts} $attemptsText. ',
+                    subTitle:
+                        '${state.totalAttempts} $attemptsText. $clickToChangeText',
                     onTap: () => showAlertDialog(
                       context: context,
                       options: totalAttemptsOptions,
@@ -56,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                   ListItemWidget(
                     title: intervalBetweenAttemptsText,
                     subTitle:
-                        '${state.intervalBetweenAttempts} $secondsText. $clickToChangeText',
+                        '${state.intervalBetweenAttempts} $secondsText $clickToChangeText',
                     onTap: () => showAlertDialog(
                       context: context,
                       options: intervalBetweenAttemptsOptions,
