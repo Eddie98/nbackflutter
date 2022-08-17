@@ -37,7 +37,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     );
   }
 
-  bool checkLastAndTwoPosBackEquality(List list) =>
+  bool checkLastAndNPosBackEquality(List list) =>
       list.last == list.reversed.elementAt(_settingsRepo.nBackValue);
 
   void trainingInitialEventHandler(event, emit) =>
@@ -51,7 +51,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       final wrongAnswersClone = [...state.wrongAnswers];
 
       if (state.colors.length > _settingsRepo.nBackValue) {
-        if (checkLastAndTwoPosBackEquality(state.colors)) {
+        if (checkLastAndNPosBackEquality(state.colors)) {
           correctAnswersClone.add(colorSign);
 
           emit(state.copyWith(
@@ -86,7 +86,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       final wrongAnswersClone = [...state.wrongAnswers];
 
       if (state.positions.length > _settingsRepo.nBackValue) {
-        if (checkLastAndTwoPosBackEquality(state.positions)) {
+        if (checkLastAndNPosBackEquality(state.positions)) {
           correctAnswersClone.add(positionSign);
 
           emit(state.copyWith(
@@ -125,11 +125,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       if (!event.isPause) {
         if (stateColors.length > _settingsRepo.nBackValue &&
             statePositions.length > _settingsRepo.nBackValue) {
-          if (checkLastAndTwoPosBackEquality(stateColors) &&
-              !isColorBtnClicked) {
+          if (checkLastAndNPosBackEquality(stateColors) && !isColorBtnClicked) {
             wrongAnswersClone.add(colorSign);
           }
-          if (checkLastAndTwoPosBackEquality(statePositions) &&
+          if (checkLastAndNPosBackEquality(statePositions) &&
               !isPositionBtnClicked) {
             wrongAnswersClone.add(positionSign);
           }
