@@ -135,13 +135,8 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
           }
         }
 
-        var constColors = [...listOfColorsForRandomSelection];
-        var constPositions = [...listOfPositionsForRandomSelection];
-
-        if (stateColors.isNotEmpty && statePositions.isNotEmpty) {
-          constColors.removeWhere((e) => e == stateColors.last);
-          constPositions.removeWhere((e) => e == statePositions.last);
-        }
+        final constColors = [...listOfColorsForRandomSelection];
+        final constPositions = [...listOfPositionsForRandomSelection];
 
         final randomColor = (constColors..shuffle()).first;
         final randomPosition = (constPositions..shuffle()).first;
