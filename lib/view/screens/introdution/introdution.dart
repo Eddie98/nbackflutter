@@ -24,7 +24,7 @@ class IntrodutionScreen extends StatelessWidget {
             automaticallyImplyLeading: false,
             elevation: 0,
             actions: [
-              const SettingsButton(),
+              const SettingsButton(isFromTrainingScreen: false),
               sizedBoxWidth(defaultHorPadding),
             ],
             flexibleSpace: FlexibleSpaceBar(
