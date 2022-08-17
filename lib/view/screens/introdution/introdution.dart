@@ -22,6 +22,7 @@ class IntrodutionScreen extends StatelessWidget {
             floating: false,
             expandedHeight: size.height * .24,
             automaticallyImplyLeading: false,
+            elevation: 0,
             actions: [
               const SettingsButton(),
               sizedBoxWidth(defaultHorPadding),
