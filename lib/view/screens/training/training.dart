@@ -119,6 +119,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                     Routes.resultsLink,
                     arguments: [state.correctAnswers, state.wrongAnswers],
                   );
+                  trainingBloc.add(const TrainingInitialEvent());
                 }
               },
               buildWhen: (oldState, newState) {

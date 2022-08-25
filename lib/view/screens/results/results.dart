@@ -37,52 +37,59 @@ class ResultsScreen extends StatelessWidget {
       comment = resultsTryMore;
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leading: ArrowBackBtnWidget(
-          () => Navigator.of(context).pushReplacementNamed(Routes.trainingLink),
+    Future<bool> _backBtnHandle(BuildContext context) {
+      Navigator.of(context).pushReplacementNamed(Routes.trainingLink);
+      return Future.value(false);
+    }
+
+    return WillPopScope(
+      onWillPop: () => _backBtnHandle(context),
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
+          title: const Text(resultsText),
         ),
-        title: const Text(resultsText),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            sizedBoxHeight(42.0),
-            Text(
-              resultsYourResults,
-              style: TextStyles.allColorPositionTS().copyWith(
-                fontWeight: FontWeight.normal,
+        body: Center(
+          child: Column(
+            children: [
+              sizedBoxHeight(42.0),
+              Text(
+                resultsYourResults,
+                style: TextStyles.allColorPositionTS().copyWith(
+                  fontWeight: FontWeight.normal,
+                ),
               ),
-            ),
-            sizedBoxHeight(12.0),
-            Text(
-              percentString,
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize: getAdaptiveFontSize(26.0),
-                color: Colors.white,
+              sizedBoxHeight(12.0),
+              Text(
+                percentString,
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: getAdaptiveFontSize(26.0),
+                  color: Colors.white,
+                ),
               ),
-            ),
-            sizedBoxHeight(28.0),
-            Text(
-              comment,
-              style: TextStyles.allColorPositionTS().copyWith(
-                fontWeight: FontWeight.normal,
+              sizedBoxHeight(28.0),
+              Text(
+                comment,
+                style: TextStyles.allColorPositionTS().copyWith(
+                  fontWeight: FontWeight.normal,
+                ),
               ),
-            ),
-            sizedBoxHeight(10.0),
-            TableWidget(
-              correctAll: correctAnswers.length,
-              correctColors: correctAnswers.where((e) => e == colorSign).length,
-              correctPositions:
-                  correctAnswers.where((e) => e == positionSign).length,
-              wrongAll: wrongAnswers.length,
-              wrongColors: wrongAnswers.where((e) => e == colorSign).length,
-              wrongPositions:
-                  wrongAnswers.where((e) => e == positionSign).length,
-            ),
-          ],
+              sizedBoxHeight(10.0),
+              TableWidget(
+                correctAll: correctAnswers.length,
+                correctColors:
+                    correctAnswers.where((e) => e == colorSign).length,
+                correctPositions:
+                    correctAnswers.where((e) => e == positionSign).length,
+                wrongAll: wrongAnswers.length,
+                wrongColors: wrongAnswers.where((e) => e == colorSign).length,
+                wrongPositions:
+                    wrongAnswers.where((e) => e == positionSign).length,
+              ),
+            ],
+          ),
         ),
       ),
     );
