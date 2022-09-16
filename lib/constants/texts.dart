@@ -1,58 +1,58 @@
-String trainingAppbarText(int value) => 'Задача $value-назад';
+String trainingAppbarText(int value) => '$value-back';
 
-const categoryText = 'Категория';
-const positionText = 'Позиция';
-const colorText = 'Цвет';
-const allText = 'Всего';
-const correctText = 'Верно';
-const wrongText = 'Неверно';
+const categoryText = 'Category';
+const positionText = 'Position';
+const colorText = 'Color';
+const allText = 'All';
+const correctText = 'Correct';
+const wrongText = 'Wrong';
 
-const cancelText = 'Отмена';
-const resultsText = 'Результаты';
-const chooseOptionsText = 'Выберите настройки';
+const cancelText = 'Cancel';
+const resultsText = 'Results';
+const chooseOptionsText = 'Choose option';
 
-const resultsYourResults = 'Ваши результаты';
-const resultsTryMore = 'Попробуйте еще раз!';
-const resultsNotGoodEnoughCanMore = 'Не очень... Можно лучше!';
-const resultsNotbadCanMore = 'Неплохо! Можно лучше!';
-const resultsGoodButMore = 'Очень хорошо! Но можно еще лучше!';
-const resultsExcellent = 'Отлично! Превосходно!';
+const resultsYourResults = 'Your results';
+const resultsTryMore = 'Try again!';
+const resultsNotGoodEnoughCanMore = 'Not very good... Can be better!';
+const resultsNotbadCanMore = 'Not bad! Can be better!';
+const resultsGoodButMore = 'Very well! But it can be even better!';
+const resultsExcellent = 'Excellent! Perfect!';
 
-const settingsText = 'Настройки';
-const totalAttemptsText = 'Всего попыток';
-const intervalBetweenAttemptsText = 'Интервал между попытками';
-const nBackValueText = 'Значение N-назад';
-const clickToChangeText = 'Нажмите чтобы изменить';
-const attemptsText = 'попыток';
-const secondsText = 'сек.';
-const itemsbackText = 'элемент(ов) назад';
+const settingsText = 'Settings';
+const totalAttemptsText = 'Total attempts';
+const intervalBetweenAttemptsText = 'Interval between attempts';
+const nBackValueText = 'N-back value';
+const clickToChangeText = 'Click to change';
+const attemptsText = 'attempts';
+const secondsText = 'sec.';
+const itemsbackText = 'item(s) back';
 
-const mainTitle = 'Задача на внимание';
+const mainTitle = 'N-Back - Attention game';
 const mainDescription = '''
-Это упражнение тренирует внимание
-и развивает интеллект.
+This exercise trains attention
+and develops the intellect.
 
-Во время теста вам будет представлен экран
-с появляющимся на нем в разных местах квадратом.
-Квадрат будет окрашен в различные цвета.
-Запоминайте, где находится этот квадрат, и 
-какого цвета он был.
+During the test, you will be presented with a screen
+with a square appearing on it in different places.
+The square will be painted in different colors.
+Remember where this square is, and
+what color was it.
 
-Если квадрат появляется в том же самом месте, 
-в котором он был ДВЕ ПОЗИЦИИ НАЗАД, нажимайте 
-кнопку "Позиция".
-Если квадрат имеет тот же самый цвет, 
-что и ДВЕ ПОЗИЦИИ НАЗАД, нажимайте кнопку "Цвет".
+If the square appears in the same place,
+in which he was TWO POSITIONS BACK, press
+"Position" button.
+If the square has the same color,
+as BACK TWO POSITIONS, press the "Color" button.
 
-За каждое правильное нажатие вы получаете одно очко.
-За каждое неправильное нажатие, или если вы 
-не нажали кнопку, когда ее следовало нажать, 
-вы получаете одно штрафное очко.
+For each correct click you get one point.
+For every wrong click, or if you
+didn't press the button when it should have been pressed,
+you get one penalty point.
 
-Полученные очки будут фиксироваться для вас 
-на счетчике.
+The points earned will be recorded for you
+on the counter.
 
-Регулярное повторение этого упражнения, как доказано
-современными иследованиями, развивает внимание, 
-координацию и интеллект.
+Regular repetition of this exercise has been proven
+modern research, develops attention,
+coordination and intelligence.
 ''';

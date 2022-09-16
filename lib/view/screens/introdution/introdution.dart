@@ -3,6 +3,7 @@ import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
+import 'package:seo_renderer/seo_renderer.dart';
 
 class IntrodutionScreen extends StatelessWidget {
   const IntrodutionScreen({Key? key}) : super(key: key);
@@ -37,7 +38,11 @@ class IntrodutionScreen extends StatelessWidget {
                   height: kToolbarHeight,
                   alignment:
                       isCollapsed ? Alignment.centerLeft : Alignment.bottomLeft,
-                  child: const Text(mainTitle),
+                  child: const TextRenderer(
+                    style: TextRendererStyle.header1,
+                    text: mainTitle,
+                    child: Text(mainTitle),
+                  ),
                 ),
                 titlePadding: EdgeInsetsDirectional.only(
                   bottom:
@@ -67,9 +72,13 @@ class IntrodutionScreen extends StatelessWidget {
                 horizontal: getPropScreenWidth(defaultHorPadding),
                 vertical: getPropScreenWidth(defaultHorPadding) * 2,
               ),
-              child: Text(
-                mainDescription,
-                style: TextStyles.mainDescriptionTS(),
+              child: TextRenderer(
+                style: TextRendererStyle.paragraph,
+                text: mainDescription,
+                child: Text(
+                  mainDescription,
+                  style: TextStyles.mainDescriptionTS(),
+                ),
               ),
             ),
           ),

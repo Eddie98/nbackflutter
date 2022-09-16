@@ -29,9 +29,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_web_frame:
-    path: ./local_packages/flutter_web_frame
-
+  flutter_web_plugins:
+    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -42,6 +41,8 @@ dependencies:
   path_provider: ^2.0.11
   bloc_concurrency: ^0.2.0
   hydrated_bloc: ^8.1.0
+  seo_renderer: ^0.6.0
+  flutter_web_frame: ^0.0.3
 
 dev_dependencies:
   flutter_test:
