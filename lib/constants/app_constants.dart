@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 const double defaultHorPadding = 16.0;
+const double defaultWebFrame = 420.0;
 const int initialSecondsDelay = 1;
 
 const totalAttemptsOptions = [25, 50, 75, 100];

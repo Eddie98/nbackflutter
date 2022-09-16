@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_web_frame/flutter_web_frame.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
@@ -12,12 +13,16 @@ import 'view/screens/training/bloc/training_bloc.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  HydratedBloc.storage = await HydratedStorage.build(
+
+  final storage = await HydratedStorage.build(
     storageDirectory: kIsWeb
         ? HydratedStorage.webStorageDirectory
         : await getTemporaryDirectory(),
   );
-  runApp(const MyApp());
+  HydratedBlocOverrides.runZoned(
+    () => runApp(const MyApp()),
+    storage: storage,
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -27,38 +32,48 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => SettingsRepository(),
-      child: Builder(builder: (context) {
-        return MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              lazy: false,
-              create: (context) => TrainingBloc(
-                settingsRepo: context.read<SettingsRepository>(),
+      child: Builder(
+        builder: (context) {
+          return MultiBlocProvider(
+            providers: [
+              BlocProvider(
+                lazy: false,
+                create: (context) => TrainingBloc(
+                  settingsRepo: context.read<SettingsRepository>(),
+                ),
               ),
-            ),
-            BlocProvider(
-              lazy: false,
-              create: (context) => SettingsBloc(
-                settingsRepo: context.read<SettingsRepository>(),
+              BlocProvider(
+                lazy: false,
+                create: (context) => SettingsBloc(
+                  settingsRepo: context.read<SettingsRepository>(),
+                ),
               ),
+            ],
+            child: FlutterWebFrame(
+              maximumSize: const Size(defaultWebFrame, double.infinity),
+              enabled: true,
+              backgroundColor: AppColors.mainBlackColor.withOpacity(.8),
+              clipBehavior: Clip.hardEdge,
+              builder: (_) {
+                return MaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  scrollBehavior: DisableGlowScrollBehavior(),
+                  theme: ThemeData(
+                    splashFactory: InkRipple.splashFactory,
+                    primaryColor: AppColors.themeColor,
+                    appBarTheme: const AppBarTheme(
+                      backgroundColor: AppColors.themeColor,
+                    ),
+                    scaffoldBackgroundColor: AppColors.mainBlackColor,
+                  ),
+                  initialRoute: Routes.introdutionLink,
+                  onGenerateRoute: Routes.onGenerateRoute,
+                );
+              },
             ),
-          ],
-          child: MaterialApp(
-            debugShowCheckedModeBanner: false,
-            scrollBehavior: DisableGlowScrollBehavior(),
-            theme: ThemeData(
-              splashFactory: InkRipple.splashFactory,
-              primaryColor: AppColors.themeColor,
-              appBarTheme: const AppBarTheme(
-                backgroundColor: AppColors.themeColor,
-              ),
-              scaffoldBackgroundColor: AppColors.mainBlackColor,
-            ),
-            initialRoute: Routes.introdutionLink,
-            onGenerateRoute: Routes.onGenerateRoute,
-          ),
-        );
-      }),
+          );
+        },
+      ),
     );
   }
 }

@@ -11,35 +11,55 @@ class IntrodutionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    final size = MediaQuery.of(context).size;
+    final mediaQuery = MediaQuery.of(context);
 
     return Scaffold(
+      backgroundColor: AppColors.mainBlackColor,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
             pinned: true,
             snap: false,
             floating: false,
-            expandedHeight: size.height * .24,
+            expandedHeight: mediaQuery.size.height * .24,
             automaticallyImplyLeading: false,
             elevation: 0,
             actions: [
               const SettingsButton(isFromTrainingScreen: false),
               sizedBoxWidth(defaultHorPadding),
             ],
-            flexibleSpace: FlexibleSpaceBar(
-              title: const Text(mainTitle),
-              centerTitle: false,
-              titlePadding: EdgeInsets.only(
-                bottom: getPropScreenWidth(defaultHorPadding),
-                left: getPropScreenWidth(defaultHorPadding),
-              ),
-              background: const DecoratedBox(
-                decoration: BoxDecoration(
-                  color: AppColors.mainBlackColor,
+            flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+              final isCollapsed = constraints.biggest.height <=
+                  mediaQuery.padding.top + kToolbarHeight + defaultHorPadding;
+
+              return FlexibleSpaceBar(
+                title: Container(
+                  height: kToolbarHeight,
+                  alignment:
+                      isCollapsed ? Alignment.centerLeft : Alignment.bottomLeft,
+                  child: const Text(mainTitle),
                 ),
-              ),
-            ),
+                titlePadding: EdgeInsetsDirectional.only(
+                  bottom:
+                      isCollapsed ? 0.0 : getPropScreenWidth(defaultHorPadding),
+                  start: getPropScreenWidth(defaultHorPadding),
+                ),
+                centerTitle: false,
+                background: const DecoratedBox(
+                  decoration: BoxDecoration(
+                    color: AppColors.mainBlackColor,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.mainBlackColor,
+                        blurRadius: 0.0,
+                        spreadRadius: 1.0,
+                        offset: Offset(0, 0),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }),
           ),
           SliverToBoxAdapter(
             child: Padding(
@@ -60,9 +80,11 @@ class IntrodutionScreen extends StatelessWidget {
           Navigator.of(context).pushNamed(Routes.trainingLink);
         },
         backgroundColor: AppColors.themeColor,
-        child: Icon(
-          Icons.arrow_right_rounded,
-          size: getPropScreenWidth(44.0),
+        child: Center(
+          child: Icon(
+            Icons.arrow_right_rounded,
+            size: getPropScreenWidth(44.0),
+          ),
         ),
       ),
     );

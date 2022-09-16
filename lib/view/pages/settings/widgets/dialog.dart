@@ -11,7 +11,6 @@ void showAlertDialog({
   required int selectedOption,
   required int root,
 }) {
-  final size = MediaQuery.of(context).size;
   final additionalText = root == 0
       ? attemptsText
       : root == 1
@@ -35,7 +34,7 @@ void showAlertDialog({
         ),
         contentPadding: EdgeInsets.zero,
         content: SizedBox(
-          width: size.width,
+          width: getWebScreenWidth(context),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: List.generate(options.length, (index) {

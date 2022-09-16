@@ -23,8 +23,8 @@ class FooterButton extends StatelessWidget {
           onPressed: onTap,
           style: ElevatedButton.styleFrom(
             fixedSize: Size(50, getPropScreenWidth(60.0)),
+            backgroundColor: AppColors.themeColor,
             textStyle: TextStyles.trainingFooterButtonsTS(),
-            primary: AppColors.themeColor,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.zero,
             ),

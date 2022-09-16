@@ -65,7 +65,7 @@ class ResultsScreen extends StatelessWidget {
                 percentString,
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: getAdaptiveFontSize(26.0),
+                  fontSize: getAdaptiveFontSize(28.0),
                   color: Colors.white,
                 ),
               ),
