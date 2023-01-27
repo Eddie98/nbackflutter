@@ -84,7 +84,10 @@ class IntrodutionScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: SafeArea(
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
         child: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).pushNamed(Routes.trainingLink);

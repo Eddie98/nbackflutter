@@ -68,6 +68,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
+    final bottomViewInsets = MediaQuery.of(context).viewInsets.bottom;
+
     return WillPopScope(
       onWillPop: () => _backBtnHandle(context),
       child: Scaffold(
@@ -80,7 +82,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
           ],
           title: Text(trainingAppbarText(settingsRepo.nBackValue)),
         ),
-        bottomNavigationBar: SafeArea(
+        bottomNavigationBar: Padding(
+          padding: EdgeInsets.only(bottom: bottomViewInsets),
           child: BottomAppBar(
             child: BlocBuilder<TrainingBloc, TrainingState>(
               builder: (context, state) {
@@ -143,7 +146,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
                         sizedBoxHeight(18.0),
                         CountersRowWidget(state),
                         sizedBoxHeight(22.0),
-                        BoardWidget(state, constraints.maxHeight),
+                        BoardWidget(
+                          state,
+                          constraints.maxHeight - bottomViewInsets,
+                        ),
                       ],
                     );
                   }
