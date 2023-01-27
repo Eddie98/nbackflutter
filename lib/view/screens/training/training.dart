@@ -80,33 +80,35 @@ class _TrainingScreenState extends State<TrainingScreen> {
           ],
           title: Text(trainingAppbarText(settingsRepo.nBackValue)),
         ),
-        bottomNavigationBar: BottomAppBar(
-          child: BlocBuilder<TrainingBloc, TrainingState>(
-            builder: (context, state) {
-              if (state is TrainingProccess) {
-                return Row(
-                  children: [
-                    FooterButton(
-                      index: 0,
-                      text: positionText,
-                      onTap: state.isPositionBtnDisabled
-                          ? null
-                          : () => trainingBloc
-                              .add(const TrainingPositionBtnClickEvent()),
-                    ),
-                    FooterButton(
-                      index: 1,
-                      text: colorText,
-                      onTap: state.isColorBtnDisabled
-                          ? null
-                          : () => trainingBloc
-                              .add(const TrainingColorBtnClickEvent()),
-                    ),
-                  ],
-                );
-              }
-              return const SizedBox.shrink();
-            },
+        bottomNavigationBar: SafeArea(
+          child: BottomAppBar(
+            child: BlocBuilder<TrainingBloc, TrainingState>(
+              builder: (context, state) {
+                if (state is TrainingProccess) {
+                  return Row(
+                    children: [
+                      FooterButton(
+                        index: 0,
+                        text: positionText,
+                        onTap: state.isPositionBtnDisabled
+                            ? null
+                            : () => trainingBloc
+                                .add(const TrainingPositionBtnClickEvent()),
+                      ),
+                      FooterButton(
+                        index: 1,
+                        text: colorText,
+                        onTap: state.isColorBtnDisabled
+                            ? null
+                            : () => trainingBloc
+                                .add(const TrainingColorBtnClickEvent()),
+                      ),
+                    ],
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
           ),
         ),
         body: SafeArea(

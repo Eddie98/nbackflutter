@@ -37,17 +37,17 @@ class ResultsScreen extends StatelessWidget {
       comment = resultsTryMore;
     }
 
-    Future<bool> _backBtnHandle(BuildContext context) {
+    Future<bool> backBtnHandle(BuildContext context) {
       Navigator.of(context).pushReplacementNamed(Routes.trainingLink);
       return Future.value(false);
     }
 
     return WillPopScope(
-      onWillPop: () => _backBtnHandle(context),
+      onWillPop: () => backBtnHandle(context),
       child: Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
+          leading: ArrowBackBtnWidget(() => backBtnHandle(context)),
           title: const Text(resultsText),
         ),
         body: Center(

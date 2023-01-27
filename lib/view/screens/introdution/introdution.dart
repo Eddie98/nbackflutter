@@ -84,15 +84,17 @@ class IntrodutionScreen extends StatelessWidget {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed(Routes.trainingLink);
-        },
-        backgroundColor: AppColors.themeColor,
-        child: Center(
-          child: Icon(
-            Icons.arrow_right_rounded,
-            size: getPropScreenWidth(44.0),
+      floatingActionButton: SafeArea(
+        child: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(Routes.trainingLink);
+          },
+          backgroundColor: AppColors.themeColor,
+          child: Center(
+            child: Icon(
+              Icons.arrow_right_rounded,
+              size: getPropScreenWidth(44.0),
+            ),
           ),
         ),
       ),
