@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
@@ -106,16 +107,22 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             text: positionText,
                             onTap: state.isPositionBtnDisabled
                                 ? null
-                                : () => trainingBloc
-                                    .add(const TrainingPositionBtnClickEvent()),
+                                : () {
+                                    HapticFeedback.lightImpact();
+                                    trainingBloc.add(
+                                        const TrainingPositionBtnClickEvent());
+                                  },
                           ),
                           FooterButton(
                             index: 1,
                             text: colorText,
                             onTap: state.isColorBtnDisabled
                                 ? null
-                                : () => trainingBloc
-                                    .add(const TrainingColorBtnClickEvent()),
+                                : () {
+                                    HapticFeedback.lightImpact();
+                                    trainingBloc.add(
+                                        const TrainingColorBtnClickEvent());
+                                  },
                           ),
                         ],
                       );

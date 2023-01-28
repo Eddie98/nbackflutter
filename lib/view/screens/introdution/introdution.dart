@@ -85,7 +85,7 @@ class IntrodutionScreen extends StatelessWidget {
         ],
       ),
       floatingActionButton: Align(
-        alignment: const Alignment(1, .9),
+        alignment: const Alignment(1, .95),
         child: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).pushNamed(Routes.trainingLink);
