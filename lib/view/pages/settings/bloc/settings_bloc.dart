@@ -24,6 +24,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
         totalAttempts: event.totalAttemptsOption,
         intervalBetweenAttempts: event.intervalBetweenAttemptsOption,
         nBackValue: event.nBackValueOption,
+        zenMode: event.zenModeOption,
       ));
     }
   }
@@ -34,11 +35,13 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.totalAttempts = json['totalAttempts'];
       _settingsRepo.intervalBetweenAttempts = json['intervalBetweenAttempts'];
       _settingsRepo.nBackValue = json['nBackValue'];
+      _settingsRepo.zenMode = json['zenMode'];
 
       return SettingsMainState(
         totalAttempts: json['totalAttempts'],
         intervalBetweenAttempts: json['intervalBetweenAttempts'],
         nBackValue: json['nBackValue'],
+        zenMode: json['zenMode'],
       );
     } catch (e) {
       return null;
@@ -51,6 +54,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.totalAttempts = state.totalAttempts;
       _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
       _settingsRepo.nBackValue = state.nBackValue;
+      _settingsRepo.zenMode = state.zenMode;
 
       return state.toMap();
     }

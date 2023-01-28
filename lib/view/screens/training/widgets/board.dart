@@ -8,18 +8,30 @@ import '../bloc/training_bloc.dart';
 class BoardWidget extends StatelessWidget {
   final TrainingProccess state;
   final double bodyHeight;
+  final bool zenMode;
 
   const BoardWidget(
     this.state,
     this.bodyHeight, {
     Key? key,
+    this.zenMode = false,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    const spacingsHeight = 66.0; // bottom spacing absent - 26.0 - if overflow.
+    const spacingsHeight = 18.0;
     const countersHeight = 23.0;
-    final itemHeight = (bodyHeight - spacingsHeight - countersHeight) / 3;
+    late double itemHeight;
+
+    if (zenMode) {
+      itemHeight = (bodyHeight - (defaultHorPadding * 2)) / 3;
+    } else {
+      itemHeight = (bodyHeight -
+              (defaultHorPadding * 2) -
+              countersHeight -
+              spacingsHeight) /
+          3;
+    }
 
     return Expanded(
       child: GridView(
@@ -31,6 +43,7 @@ class BoardWidget extends StatelessWidget {
         ),
         padding: EdgeInsets.symmetric(
           horizontal: getPropScreenWidth(defaultHorPadding),
+          vertical: getPropScreenWidth(defaultHorPadding),
         ),
         children: List.generate(9, (index) {
           if (!state.isPause &&

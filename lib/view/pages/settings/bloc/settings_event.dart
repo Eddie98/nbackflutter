@@ -11,11 +11,13 @@ class SettingsChangeEvent extends SettingsEvent {
   final int? totalAttemptsOption;
   final int? intervalBetweenAttemptsOption;
   final int? nBackValueOption;
+  final bool? zenModeOption;
 
   const SettingsChangeEvent({
     this.totalAttemptsOption,
     this.intervalBetweenAttemptsOption,
     this.nBackValueOption,
+    this.zenModeOption,
   });
 
   @override
@@ -23,5 +25,6 @@ class SettingsChangeEvent extends SettingsEvent {
         totalAttemptsOption,
         intervalBetweenAttemptsOption,
         nBackValueOption,
+        zenModeOption,
       ];
 }

@@ -152,12 +152,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
                       if (state is TrainingProccess) {
                         return Column(
                           children: [
-                            sizedBoxHeight(18.0),
-                            CountersRowWidget(state),
-                            sizedBoxHeight(22.0),
+                            if (!settingsRepo.zenMode) ...[
+                              sizedBoxHeight(18.0),
+                              CountersRowWidget(state),
+                            ],
                             BoardWidget(
                               state,
                               constraints.maxHeight,
+                              zenMode: settingsRepo.zenMode,
                             ),
                           ],
                         );

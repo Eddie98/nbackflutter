@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
@@ -76,6 +77,21 @@ class SettingsPage extends StatelessWidget {
                           options: nBackValueOptions,
                           selectedOption: state.nBackValue,
                           root: 2,
+                        ),
+                      ),
+                      ListTile(
+                        onTap: () => context.read<SettingsBloc>().add(
+                            SettingsChangeEvent(zenModeOption: !state.zenMode)),
+                        title: Text(
+                          zenModeText,
+                          style: TextStyles.settingsPageTS(),
+                        ),
+                        trailing: CupertinoSwitch(
+                          activeColor: AppColors.themeColor,
+                          value: state.zenMode,
+                          onChanged: (_) => context.read<SettingsBloc>().add(
+                              SettingsChangeEvent(
+                                  zenModeOption: !state.zenMode)),
                         ),
                       ),
                     ],
