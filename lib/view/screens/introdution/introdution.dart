@@ -1,5 +1,4 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
@@ -18,9 +17,9 @@ class IntrodutionScreen extends StatelessWidget {
 
     return SafeArea(
       top: false,
-      minimum: Platform.isIOS
+      minimum: defaultTargetPlatform == TargetPlatform.iOS
           ? EdgeInsets.only(
-              bottom: getPropScreenWidth(18.0),
+              bottom: getPropScreenWidth(24.0),
             )
           : EdgeInsets.zero,
       child: Scaffold(
