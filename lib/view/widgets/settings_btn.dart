@@ -37,6 +37,7 @@ class SettingsButton extends StatelessWidget {
       iconSize: getPropScreenWidth(26.0),
       padding: EdgeInsets.zero,
       constraints: const BoxConstraints(),
+      splashRadius: getPropScreenWidth(26.0),
       icon: const Icon(Icons.settings),
     );
   }

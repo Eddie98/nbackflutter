@@ -14,81 +14,81 @@ class IntrodutionScreen extends StatelessWidget {
 
     final mediaQuery = MediaQuery.of(context);
 
-    return Scaffold(
-      backgroundColor: AppColors.mainBlackColor,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            pinned: true,
-            snap: false,
-            floating: false,
-            expandedHeight: mediaQuery.size.height * .24,
-            automaticallyImplyLeading: false,
-            elevation: 0,
-            actions: [
-              const SettingsButton(isFromTrainingScreen: false),
-              sizedBoxWidth(defaultHorPadding),
-            ],
-            flexibleSpace: LayoutBuilder(builder: (context, constraints) {
-              final isCollapsed = constraints.biggest.height <=
-                  mediaQuery.padding.top + kToolbarHeight + defaultHorPadding;
+    return SafeArea(
+      top: false,
+      child: Scaffold(
+        backgroundColor: AppColors.mainBlackColor,
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              pinned: true,
+              snap: false,
+              floating: false,
+              expandedHeight: mediaQuery.size.height * .24,
+              automaticallyImplyLeading: false,
+              elevation: 0,
+              actions: [
+                const SettingsButton(isFromTrainingScreen: false),
+                sizedBoxWidth(defaultHorPadding),
+              ],
+              flexibleSpace: LayoutBuilder(builder: (context, constraints) {
+                final isCollapsed = constraints.biggest.height <=
+                    mediaQuery.padding.top + kToolbarHeight + defaultHorPadding;
 
-              return FlexibleSpaceBar(
-                title: Container(
-                  height: kToolbarHeight,
-                  alignment:
-                      isCollapsed ? Alignment.centerLeft : Alignment.bottomLeft,
-                  child: const TextRenderer(
-                    style: TextRendererStyle.header1,
-                    text: mainTitle,
-                    child: Text(mainTitle),
+                return FlexibleSpaceBar(
+                  title: Container(
+                    height: kToolbarHeight,
+                    alignment: isCollapsed
+                        ? Alignment.centerLeft
+                        : Alignment.bottomLeft,
+                    child: const TextRenderer(
+                      style: TextRendererStyle.header1,
+                      text: mainTitle,
+                      child: Text(mainTitle),
+                    ),
                   ),
-                ),
-                titlePadding: EdgeInsetsDirectional.only(
-                  bottom:
-                      isCollapsed ? 0.0 : getPropScreenWidth(defaultHorPadding),
-                  start: getPropScreenWidth(defaultHorPadding),
-                ),
-                centerTitle: false,
-                background: const DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: AppColors.mainBlackColor,
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppColors.mainBlackColor,
-                        blurRadius: 0.0,
-                        spreadRadius: 1.0,
-                        offset: Offset(0, 0),
-                      ),
-                    ],
+                  titlePadding: EdgeInsetsDirectional.only(
+                    bottom: isCollapsed
+                        ? 0.0
+                        : getPropScreenWidth(defaultHorPadding),
+                    start: getPropScreenWidth(defaultHorPadding),
                   ),
+                  centerTitle: false,
+                  background: const DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: AppColors.mainBlackColor,
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.mainBlackColor,
+                          blurRadius: 0.0,
+                          spreadRadius: 1.0,
+                          offset: Offset(0, 0),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }),
+            ),
+            SliverToBoxAdapter(
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: getPropScreenWidth(defaultHorPadding),
+                  vertical: getPropScreenWidth(defaultHorPadding) * 2,
                 ),
-              );
-            }),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: EdgeInsets.symmetric(
-                horizontal: getPropScreenWidth(defaultHorPadding),
-                vertical: getPropScreenWidth(defaultHorPadding) * 2,
-              ),
-              child: TextRenderer(
-                style: TextRendererStyle.paragraph,
-                text: mainDescription,
-                child: Text(
-                  mainDescription,
-                  style: TextStyles.mainDescriptionTS(),
+                child: TextRenderer(
+                  style: TextRendererStyle.paragraph,
+                  text: mainDescription,
+                  child: Text(
+                    mainDescription,
+                    style: TextStyles.mainDescriptionTS(),
+                  ),
                 ),
               ),
             ),
-          ),
-        ],
-      ),
-      floatingActionButton: Padding(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
+          ],
         ),
-        child: FloatingActionButton(
+        floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.of(context).pushNamed(Routes.trainingLink);
           },

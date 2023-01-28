@@ -68,98 +68,103 @@ class _TrainingScreenState extends State<TrainingScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
 
-    final bottomViewInsets = MediaQuery.of(context).viewInsets.bottom;
-
-    return WillPopScope(
-      onWillPop: () => _backBtnHandle(context),
-      child: Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
-          actions: [
-            const SettingsButton(isFromTrainingScreen: true),
-            sizedBoxWidth(defaultHorPadding),
-          ],
-          title: Text(trainingAppbarText(settingsRepo.nBackValue)),
+    return Stack(
+      children: [
+        Positioned.fill(
+          child: Container(
+            color: AppColors.themeColor,
+          ),
         ),
-        bottomNavigationBar: Padding(
-          padding: EdgeInsets.only(bottom: bottomViewInsets),
-          child: BottomAppBar(
-            child: BlocBuilder<TrainingBloc, TrainingState>(
-              builder: (context, state) {
-                if (state is TrainingProccess) {
-                  return Row(
-                    children: [
-                      FooterButton(
-                        index: 0,
-                        text: positionText,
-                        onTap: state.isPositionBtnDisabled
-                            ? null
-                            : () => trainingBloc
-                                .add(const TrainingPositionBtnClickEvent()),
-                      ),
-                      FooterButton(
-                        index: 1,
-                        text: colorText,
-                        onTap: state.isColorBtnDisabled
-                            ? null
-                            : () => trainingBloc
-                                .add(const TrainingColorBtnClickEvent()),
-                      ),
-                    ],
+        SafeArea(
+          child: WillPopScope(
+            onWillPop: () => _backBtnHandle(context),
+            child: Scaffold(
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
+                leading: ArrowBackBtnWidget(() => _backBtnHandle(context)),
+                actions: [
+                  const SettingsButton(isFromTrainingScreen: true),
+                  sizedBoxWidth(defaultHorPadding),
+                ],
+                title: Text(trainingAppbarText(settingsRepo.nBackValue)),
+              ),
+              bottomNavigationBar: BottomAppBar(
+                elevation: 0.0,
+                child: BlocBuilder<TrainingBloc, TrainingState>(
+                  builder: (context, state) {
+                    if (state is TrainingProccess) {
+                      return Row(
+                        children: [
+                          FooterButton(
+                            index: 0,
+                            text: positionText,
+                            onTap: state.isPositionBtnDisabled
+                                ? null
+                                : () => trainingBloc
+                                    .add(const TrainingPositionBtnClickEvent()),
+                          ),
+                          FooterButton(
+                            index: 1,
+                            text: colorText,
+                            onTap: state.isColorBtnDisabled
+                                ? null
+                                : () => trainingBloc
+                                    .add(const TrainingColorBtnClickEvent()),
+                          ),
+                        ],
+                      );
+                    }
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
+              body: LayoutBuilder(
+                builder: (context, constraints) {
+                  return BlocConsumer<TrainingBloc, TrainingState>(
+                    listenWhen: (oldState, newState) {
+                      if (newState is TrainingProccess) {
+                        return newState.counter > settingsRepo.totalAttempts;
+                      }
+                      return true;
+                    },
+                    listener: (context, state) {
+                      if (state is TrainingProccess) {
+                        Navigator.of(context).pushReplacementNamed(
+                          Routes.resultsLink,
+                          arguments: [state.correctAnswers, state.wrongAnswers],
+                        );
+                        trainingBloc.add(const TrainingInitialEvent());
+                      }
+                    },
+                    buildWhen: (oldState, newState) {
+                      if (newState is TrainingProccess) {
+                        return newState.counter <= settingsRepo.totalAttempts;
+                      }
+                      return true;
+                    },
+                    builder: (context, state) {
+                      if (state is TrainingProccess) {
+                        return Column(
+                          children: [
+                            sizedBoxHeight(18.0),
+                            CountersRowWidget(state),
+                            sizedBoxHeight(22.0),
+                            BoardWidget(
+                              state,
+                              constraints.maxHeight,
+                            ),
+                          ],
+                        );
+                      }
+                      return const SizedBox.shrink();
+                    },
                   );
-                }
-                return const SizedBox.shrink();
-              },
+                },
+              ),
             ),
           ),
         ),
-        body: SafeArea(
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              return BlocConsumer<TrainingBloc, TrainingState>(
-                listenWhen: (oldState, newState) {
-                  if (newState is TrainingProccess) {
-                    return newState.counter > settingsRepo.totalAttempts;
-                  }
-                  return true;
-                },
-                listener: (context, state) {
-                  if (state is TrainingProccess) {
-                    Navigator.of(context).pushReplacementNamed(
-                      Routes.resultsLink,
-                      arguments: [state.correctAnswers, state.wrongAnswers],
-                    );
-                    trainingBloc.add(const TrainingInitialEvent());
-                  }
-                },
-                buildWhen: (oldState, newState) {
-                  if (newState is TrainingProccess) {
-                    return newState.counter <= settingsRepo.totalAttempts;
-                  }
-                  return true;
-                },
-                builder: (context, state) {
-                  if (state is TrainingProccess) {
-                    return Column(
-                      children: [
-                        sizedBoxHeight(18.0),
-                        CountersRowWidget(state),
-                        sizedBoxHeight(22.0),
-                        BoardWidget(
-                          state,
-                          constraints.maxHeight - bottomViewInsets,
-                        ),
-                      ],
-                    );
-                  }
-                  return const SizedBox.shrink();
-                },
-              );
-            },
-          ),
-        ),
-      ),
+      ],
     );
   }
 }

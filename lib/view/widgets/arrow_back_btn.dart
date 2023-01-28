@@ -11,7 +11,8 @@ class ArrowBackBtnWidget extends StatelessWidget {
     return IconButton(
       onPressed: onTap,
       iconSize: getPropScreenWidth(26.0),
-      icon: const Icon(Icons.arrow_back),
+      splashRadius: getPropScreenWidth(26.0),
+      icon: const Icon(Icons.arrow_back_ios),
     );
   }
 }
