@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -76,6 +77,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
           ),
         ),
         SafeArea(
+          minimum: Platform.isIOS
+              ? EdgeInsets.only(
+                  bottom: getPropScreenWidth(18.0),
+                )
+              : EdgeInsets.zero,
           child: WillPopScope(
             onWillPop: () => _backBtnHandle(context),
             child: Scaffold(
