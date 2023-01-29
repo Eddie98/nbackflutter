@@ -12,12 +12,14 @@ class SettingsMainState extends SettingsState {
   final int intervalBetweenAttempts;
   final int nBackValue;
   final bool zenMode;
+  final bool hints;
 
   const SettingsMainState({
     this.totalAttempts = defaultTotalAttempts,
     this.intervalBetweenAttempts = defaultIntervalBetweenAttempts,
     this.nBackValue = defaultNBackValue,
     this.zenMode = defaultZenMode,
+    this.hints = defaultHints,
   });
 
   Map<String, dynamic> toMap() => {
@@ -25,6 +27,7 @@ class SettingsMainState extends SettingsState {
         'intervalBetweenAttempts': intervalBetweenAttempts,
         'nBackValue': nBackValue,
         'zenMode': zenMode,
+        'hints': hints,
       };
 
   SettingsMainState copyWith({
@@ -32,6 +35,7 @@ class SettingsMainState extends SettingsState {
     int? intervalBetweenAttempts,
     int? nBackValue,
     bool? zenMode,
+    bool? hints,
   }) {
     return SettingsMainState(
       totalAttempts: totalAttempts ?? this.totalAttempts,
@@ -39,6 +43,7 @@ class SettingsMainState extends SettingsState {
           intervalBetweenAttempts ?? this.intervalBetweenAttempts,
       nBackValue: nBackValue ?? this.nBackValue,
       zenMode: zenMode ?? this.zenMode,
+      hints: hints ?? this.hints,
     );
   }
 
@@ -48,5 +53,6 @@ class SettingsMainState extends SettingsState {
         intervalBetweenAttempts,
         nBackValue,
         zenMode,
+        hints,
       ];
 }

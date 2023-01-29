@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:nbackflutter/constants/index.dart';
 
-class ListItemWidget extends StatelessWidget {
+class DialogListItemWidget extends StatelessWidget {
   final String title;
   final String subTitle;
   final VoidCallback onTap;
 
-  const ListItemWidget({
+  const DialogListItemWidget({
     Key? key,
     required this.title,
     required this.subTitle,

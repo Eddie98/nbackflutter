@@ -17,7 +17,10 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
     on<SettingsChangeEvent>(settingsChangeEventHandler);
   }
 
-  void settingsChangeEventHandler(event, emit) {
+  void settingsChangeEventHandler(
+    SettingsChangeEvent event,
+    Emitter<SettingsState> emit,
+  ) {
     final state = this.state;
 
     if (state is SettingsMainState) {
@@ -26,6 +29,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
         intervalBetweenAttempts: event.intervalBetweenAttemptsOption,
         nBackValue: event.nBackValueOption,
         zenMode: event.zenModeOption,
+        hints: event.hintsOption,
       ));
     }
   }
@@ -37,12 +41,14 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.intervalBetweenAttempts = json['intervalBetweenAttempts'];
       _settingsRepo.nBackValue = json['nBackValue'];
       _settingsRepo.zenMode = json['zenMode'];
+      _settingsRepo.hints = json['hints'];
 
       return SettingsMainState(
         totalAttempts: json['totalAttempts'],
         intervalBetweenAttempts: json['intervalBetweenAttempts'],
         nBackValue: json['nBackValue'],
         zenMode: json['zenMode'],
+        hints: json['hints'],
       );
     } catch (e) {
       return null;
@@ -56,6 +62,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
       _settingsRepo.nBackValue = state.nBackValue;
       _settingsRepo.zenMode = state.zenMode;
+      _settingsRepo.hints = state.hints;
 
       return state.toMap();
     }

@@ -8,12 +8,14 @@ class BoardWidget extends StatelessWidget {
   final TrainingProccess state;
   final double bodyHeight;
   final bool zenMode;
+  final bool hints;
 
   const BoardWidget(
     this.state,
     this.bodyHeight, {
     Key? key,
     this.zenMode = false,
+    this.hints = false,
   }) : super(key: key);
 
   @override
@@ -48,9 +50,16 @@ class BoardWidget extends StatelessWidget {
           if (!state.isPause &&
               state.positions.isNotEmpty &&
               index == state.positions.last) {
-            return _GridItemWidget(index, color: state.colors.last);
+            return _GridItemWidget(
+              index,
+              color: state.colors.last,
+              hints: hints,
+            );
           }
-          return _GridItemWidget(index);
+          return _GridItemWidget(
+            index,
+            hints: hints,
+          );
         }),
       ),
     );
@@ -59,11 +68,13 @@ class BoardWidget extends StatelessWidget {
 
 class _GridItemWidget extends StatelessWidget {
   final int index;
+  final bool hints;
   final Color? color;
 
   const _GridItemWidget(
     this.index, {
     this.color,
+    required this.hints,
     Key? key,
   }) : super(key: key);
 
@@ -73,7 +84,7 @@ class _GridItemWidget extends StatelessWidget {
       color: AppColors.mainGreyColor,
       child: index == 4
           ? const _CrossWidget()
-          : _ColorsWidget(index: index, color: color),
+          : _ColorsWidget(index: hints ? index : null, color: color),
     );
   }
 }
@@ -111,12 +122,12 @@ class _CrossWidget extends StatelessWidget {
 }
 
 class _ColorsWidget extends StatelessWidget {
-  final int index;
+  final int? index;
   final Color? color;
 
   const _ColorsWidget({
     Key? key,
-    required this.index,
+    this.index,
     this.color,
   }) : super(key: key);
 
@@ -126,10 +137,12 @@ class _ColorsWidget extends StatelessWidget {
       margin: EdgeInsets.all(getPropScreenWidth(3.0)),
       color: color,
       alignment: Alignment.center,
-      child: Text(
-        index.toString(),
-        style: TextStyles.boardIndexText(),
-      ),
+      child: index == null
+          ? null
+          : Text(
+              index.toString(),
+              style: TextStyles.boardIndexText(),
+            ),
     );
   }
 }

@@ -97,7 +97,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 title: Row(
                   children: [
                     Text(trainingAppbarText(settingsRepo.nBackValue)),
-                    if (!settingsRepo.zenMode) const HistoryRow(),
+                    if (settingsRepo.hints)
+                      HistoryRow(nBackValue: settingsRepo.nBackValue),
                   ],
                 ),
               ),
@@ -173,6 +174,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                               state,
                               constraints.maxHeight,
                               zenMode: settingsRepo.zenMode,
+                              hints: settingsRepo.hints,
                             ),
                           ],
                         );

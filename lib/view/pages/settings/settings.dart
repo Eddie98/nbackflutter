@@ -1,14 +1,14 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
+import 'package:nbackflutter/view/pages/settings/widgets/switch_list_item.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
 import 'bloc/settings_bloc.dart';
 import 'widgets/dialog.dart';
-import 'widgets/list_item.dart';
+import 'widgets/dialog_list_item.dart';
 
 class SettingsPage extends StatelessWidget {
   final bool isFromTrainingScreen;
@@ -46,7 +46,7 @@ class SettingsPage extends StatelessWidget {
                 if (state is SettingsMainState) {
                   return Column(
                     children: [
-                      ListItemWidget(
+                      DialogListItemWidget(
                         title: totalAttemptsText,
                         subTitle:
                             '${state.totalAttempts} $attemptsText. $clickToChangeText',
@@ -57,7 +57,7 @@ class SettingsPage extends StatelessWidget {
                           root: 0,
                         ),
                       ),
-                      ListItemWidget(
+                      DialogListItemWidget(
                         title: intervalBetweenAttemptsText,
                         subTitle:
                             '${state.intervalBetweenAttempts} $secondsText $clickToChangeText',
@@ -68,7 +68,7 @@ class SettingsPage extends StatelessWidget {
                           root: 1,
                         ),
                       ),
-                      ListItemWidget(
+                      DialogListItemWidget(
                         title: nBackValueText,
                         subTitle:
                             '${state.nBackValue} $itemsbackText. $clickToChangeText',
@@ -79,20 +79,17 @@ class SettingsPage extends StatelessWidget {
                           root: 2,
                         ),
                       ),
-                      ListTile(
-                        onTap: () => context.read<SettingsBloc>().add(
+                      SwitchListItemWidget(
+                        title: zenModeText,
+                        value: state.zenMode,
+                        onChanged: () => context.read<SettingsBloc>().add(
                             SettingsChangeEvent(zenModeOption: !state.zenMode)),
-                        title: Text(
-                          zenModeText,
-                          style: TextStyles.settingsPageTS(),
-                        ),
-                        trailing: CupertinoSwitch(
-                          activeColor: AppColors.themeColor,
-                          value: state.zenMode,
-                          onChanged: (_) => context.read<SettingsBloc>().add(
-                              SettingsChangeEvent(
-                                  zenModeOption: !state.zenMode)),
-                        ),
+                      ),
+                      SwitchListItemWidget(
+                        title: hintsText,
+                        value: state.hints,
+                        onChanged: () => context.read<SettingsBloc>().add(
+                            SettingsChangeEvent(hintsOption: !state.hints)),
                       ),
                     ],
                   );

@@ -23,6 +23,7 @@ const totalAttemptsText = 'Total attempts';
 const intervalBetweenAttemptsText = 'Interval between attempts';
 const nBackValueText = 'N-back value';
 const zenModeText = 'Zen Mode';
+const hintsText = 'Hints';
 const clickToChangeText = 'Click to change';
 const attemptsText = 'attempts';
 const secondsText = 'sec.';

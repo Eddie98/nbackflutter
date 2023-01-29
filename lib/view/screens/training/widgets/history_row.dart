@@ -5,23 +5,28 @@ import 'package:nbackflutter/view/screens/training/bloc/training_bloc.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
 class HistoryRow extends StatelessWidget {
-  const HistoryRow({super.key});
+  const HistoryRow({super.key, required this.nBackValue});
+
+  final int nBackValue;
 
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TrainingBloc, TrainingState>(
       builder: (context, state) {
         if (state is TrainingProccess) {
+          final slicedPositions = state.positions.reversed.take(nBackValue + 1);
+          final slicedColors = state.colors.reversed.take(nBackValue + 1);
+
           return Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.horizontal,
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: List.generate(
-                  state.positions.length,
+                  slicedPositions.length,
                   (index) {
-                    final position = state.positions.reversed.elementAt(index);
-                    final color = state.colors.reversed.elementAt(index);
+                    final position = slicedPositions.elementAt(index);
+                    final color = slicedColors.elementAt(index);
 
                     return Row(
                       children: [

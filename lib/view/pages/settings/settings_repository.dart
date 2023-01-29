@@ -5,4 +5,5 @@ class SettingsRepository {
   int intervalBetweenAttempts = defaultIntervalBetweenAttempts;
   int nBackValue = defaultNBackValue;
   bool zenMode = defaultZenMode;
+  bool hints = defaultHints;
 }
