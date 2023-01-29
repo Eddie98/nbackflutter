@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
 import 'package:nbackflutter/utils/index.dart';
+import 'package:nbackflutter/view/screens/training/widgets/history_row.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
 import '../../pages/settings/settings_repository.dart';
@@ -93,7 +94,12 @@ class _TrainingScreenState extends State<TrainingScreen> {
                   const SettingsButton(isFromTrainingScreen: true),
                   sizedBoxWidth(defaultHorPadding),
                 ],
-                title: Text(trainingAppbarText(settingsRepo.nBackValue)),
+                title: Row(
+                  children: [
+                    Text(trainingAppbarText(settingsRepo.nBackValue)),
+                    if (!settingsRepo.zenMode) const HistoryRow(),
+                  ],
+                ),
               ),
               bottomNavigationBar: BottomAppBar(
                 elevation: 0.0,

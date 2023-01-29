@@ -21,4 +21,9 @@ class TextStyles {
         fontSize: getAdaptiveFontSize(19.0),
         fontWeight: FontWeight.w500,
       );
+  static TextStyle boardIndexText() => TextStyle(
+        color: Colors.black45,
+        fontSize: getAdaptiveFontSize(30.0),
+        fontWeight: FontWeight.w500,
+      );
 }

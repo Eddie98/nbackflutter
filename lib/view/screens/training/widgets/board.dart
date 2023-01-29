@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:nbackflutter/constants/app_colors.dart';
-import 'package:nbackflutter/constants/app_constants.dart';
+import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/utils/index.dart';
 
 import '../bloc/training_bloc.dart';
@@ -72,7 +71,9 @@ class _GridItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: AppColors.mainGreyColor,
-      child: index == 4 ? const _CrossWidget() : _ColorsWidget(color: color),
+      child: index == 4
+          ? const _CrossWidget()
+          : _ColorsWidget(index: index, color: color),
     );
   }
 }
@@ -110,15 +111,25 @@ class _CrossWidget extends StatelessWidget {
 }
 
 class _ColorsWidget extends StatelessWidget {
+  final int index;
   final Color? color;
 
-  const _ColorsWidget({Key? key, this.color}) : super(key: key);
+  const _ColorsWidget({
+    Key? key,
+    required this.index,
+    this.color,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.all(getPropScreenWidth(3.0)),
       color: color,
+      alignment: Alignment.center,
+      child: Text(
+        index.toString(),
+        style: TextStyles.boardIndexText(),
+      ),
     );
   }
 }
