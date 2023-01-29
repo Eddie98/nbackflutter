@@ -14,10 +14,10 @@ class SettingsMainState extends SettingsState {
   final bool zenMode;
 
   const SettingsMainState({
-    this.totalAttempts = 25,
-    this.intervalBetweenAttempts = 2,
-    this.nBackValue = 2,
-    this.zenMode = false,
+    this.totalAttempts = defaultTotalAttempts,
+    this.intervalBetweenAttempts = defaultIntervalBetweenAttempts,
+    this.nBackValue = defaultNBackValue,
+    this.zenMode = defaultZenMode,
   });
 
   Map<String, dynamic> toMap() => {

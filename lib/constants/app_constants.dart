@@ -4,6 +4,11 @@ const double defaultHorPadding = 16.0;
 const double defaultWebFrame = 420.0;
 const int initialSecondsDelay = 1;
 
+const int defaultTotalAttempts = 25;
+const int defaultIntervalBetweenAttempts = 2;
+const int defaultNBackValue = 2;
+const bool defaultZenMode = false;
+
 const totalAttemptsOptions = [25, 50, 75, 100];
 const intervalBetweenAttemptsOptions = [2, 3, 4, 5, 6, 7];
 const nBackValueOptions = [2, 3, 4];

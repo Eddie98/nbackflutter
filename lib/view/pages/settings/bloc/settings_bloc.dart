@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:nbackflutter/constants/app_constants.dart';
 
 import '../settings_repository.dart';
 

@@ -1,6 +1,8 @@
+import 'package:nbackflutter/constants/app_constants.dart';
+
 class SettingsRepository {
-  int totalAttempts = 25;
-  int intervalBetweenAttempts = 2;
-  int nBackValue = 2;
-  bool zenMode = false;
+  int totalAttempts = defaultTotalAttempts;
+  int intervalBetweenAttempts = defaultIntervalBetweenAttempts;
+  int nBackValue = defaultNBackValue;
+  bool zenMode = defaultZenMode;
 }

@@ -108,7 +108,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             onTap: state.isPositionBtnDisabled
                                 ? null
                                 : () {
-                                    HapticFeedback.lightImpact();
+                                    HapticFeedback.vibrate();
                                     trainingBloc.add(
                                         const TrainingPositionBtnClickEvent());
                                   },
@@ -119,7 +119,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             onTap: state.isColorBtnDisabled
                                 ? null
                                 : () {
-                                    HapticFeedback.lightImpact();
+                                    HapticFeedback.vibrate();
                                     trainingBloc.add(
                                         const TrainingColorBtnClickEvent());
                                   },
