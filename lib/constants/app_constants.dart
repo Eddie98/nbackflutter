@@ -12,7 +12,7 @@ const bool defaultHints = false;
 
 const totalAttemptsOptions = [25, 50, 75, 100];
 const intervalBetweenAttemptsOptions = [2, 3, 4, 5, 6, 7];
-const nBackValueOptions = [2, 3, 4];
+const nBackValueOptions = [1, 2, 3, 4];
 
 const String colorSign = 'c';
 const String positionSign = 'p';
