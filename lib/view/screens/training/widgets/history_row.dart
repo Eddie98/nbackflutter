@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:nbackflutter/constants/app_constants.dart';
 import 'package:nbackflutter/utils/index.dart';
 import 'package:nbackflutter/view/screens/training/bloc/training_bloc.dart';
 import 'package:nbackflutter/view/widgets/index.dart';
 
 class HistoryRow extends StatelessWidget {
-  const HistoryRow({super.key, required this.nBackValue});
+  const HistoryRow({
+    super.key,
+    required this.nBackValue,
+    required this.isSingleDimension,
+  });
 
   final int nBackValue;
+  final bool isSingleDimension;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +40,8 @@ class HistoryRow extends StatelessWidget {
                         Container(
                           width: getPropScreenWidth(kToolbarHeight / 3),
                           height: getPropScreenWidth(kToolbarHeight / 3),
-                          color: color,
+                          color:
+                              isSingleDimension ? singleDimensionColor : color,
                         ),
                         sizedBoxWidth(4.0),
                         Text(position.toString()),

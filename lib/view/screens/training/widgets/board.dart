@@ -9,6 +9,7 @@ class BoardWidget extends StatelessWidget {
   final double bodyHeight;
   final bool zenMode;
   final bool hints;
+  final bool isSingleDimension;
 
   const BoardWidget(
     this.state,
@@ -16,6 +17,7 @@ class BoardWidget extends StatelessWidget {
     Key? key,
     this.zenMode = false,
     this.hints = false,
+    this.isSingleDimension = false,
   }) : super(key: key);
 
   @override
@@ -52,7 +54,8 @@ class BoardWidget extends StatelessWidget {
               index == state.positions.last) {
             return _GridItemWidget(
               index,
-              color: state.colors.last,
+              color:
+                  isSingleDimension ? singleDimensionColor : state.colors.last,
               hints: hints,
             );
           }

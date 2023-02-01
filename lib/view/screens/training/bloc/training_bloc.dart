@@ -138,8 +138,11 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       if (!event.isPause) {
         if (stateColors.length > _settingsRepo.nBackValue &&
             statePositions.length > _settingsRepo.nBackValue) {
-          if (checkLastAndNPosBackEquality(stateColors) && !isColorBtnClicked) {
-            wrongAnswersClone.add(colorSign);
+          if (_settingsRepo.dimension == 2) {
+            if (checkLastAndNPosBackEquality(stateColors) &&
+                !isColorBtnClicked) {
+              wrongAnswersClone.add(colorSign);
+            }
           }
           if (checkLastAndNPosBackEquality(statePositions) &&
               !isPositionBtnClicked) {

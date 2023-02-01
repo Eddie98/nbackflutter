@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nbackflutter/constants/index.dart';
 import 'package:nbackflutter/routes.dart';
@@ -27,10 +26,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
   late final TrainingBloc trainingBloc;
   late final SettingsRepository settingsRepo;
 
+  late bool isSingleDimension;
+
   @override
   void initState() {
     trainingBloc = context.read<TrainingBloc>();
     settingsRepo = context.read<SettingsRepository>();
+
+    isSingleDimension = settingsRepo.dimension == 1;
 
     trainingBloc.add(const TrainingInitialEvent());
     Future.delayed(const Duration(seconds: initialSecondsDelay), () {
@@ -96,9 +99,13 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 ],
                 title: Row(
                   children: [
-                    Text(trainingAppbarText(settingsRepo.nBackValue)),
-                    if (settingsRepo.hints)
-                      HistoryRow(nBackValue: settingsRepo.nBackValue),
+                    if (!settingsRepo.hints)
+                      Text(trainingAppbarText(settingsRepo.nBackValue))
+                    else
+                      HistoryRow(
+                        nBackValue: settingsRepo.nBackValue,
+                        isSingleDimension: isSingleDimension,
+                      ),
                   ],
                 ),
               ),
@@ -115,21 +122,22 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             onTap: state.isPositionBtnDisabled
                                 ? null
                                 : () {
-                                    HapticFeedback.vibrate();
                                     trainingBloc.add(
                                         const TrainingPositionBtnClickEvent());
                                   },
                           ),
-                          FooterButton(
-                            index: 1,
-                            text: colorText,
-                            onTap: state.isColorBtnDisabled
-                                ? null
-                                : () {
-                                    HapticFeedback.vibrate();
-                                    trainingBloc.add(
-                                        const TrainingColorBtnClickEvent());
-                                  },
+                          Visibility(
+                            visible: !isSingleDimension,
+                            child: FooterButton(
+                              index: 1,
+                              text: colorText,
+                              onTap: state.isColorBtnDisabled
+                                  ? null
+                                  : () {
+                                      trainingBloc.add(
+                                          const TrainingColorBtnClickEvent());
+                                    },
+                            ),
                           ),
                         ],
                       );
@@ -175,6 +183,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                               constraints.maxHeight,
                               zenMode: settingsRepo.zenMode,
                               hints: settingsRepo.hints,
+                              isSingleDimension: isSingleDimension,
                             ),
                           ],
                         );

@@ -82,7 +82,7 @@ class SettingsPage extends StatelessWidget {
                       DialogListItemWidget(
                         title: dimensionText,
                         subTitle:
-                            '${state.dimension == -1 ? '1' : state.dimension} $dimensionsText. $clickToChangeText',
+                            '${state.dimension} $dimensionsText. $clickToChangeText',
                         onTap: () => showAlertDialog(
                           context: context,
                           options: dimensionOptions,
