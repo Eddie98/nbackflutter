@@ -28,6 +28,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
         totalAttempts: event.totalAttemptsOption,
         intervalBetweenAttempts: event.intervalBetweenAttemptsOption,
         nBackValue: event.nBackValueOption,
+        dimension: event.dimensionOption,
         zenMode: event.zenModeOption,
         hints: event.hintsOption,
       ));
@@ -40,6 +41,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.totalAttempts = json['totalAttempts'];
       _settingsRepo.intervalBetweenAttempts = json['intervalBetweenAttempts'];
       _settingsRepo.nBackValue = json['nBackValue'];
+      _settingsRepo.dimension = json['dimension'];
       _settingsRepo.zenMode = json['zenMode'];
       _settingsRepo.hints = json['hints'];
 
@@ -47,6 +49,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
         totalAttempts: json['totalAttempts'],
         intervalBetweenAttempts: json['intervalBetweenAttempts'],
         nBackValue: json['nBackValue'],
+        dimension: json['dimension'],
         zenMode: json['zenMode'],
         hints: json['hints'],
       );
@@ -61,6 +64,7 @@ class SettingsBloc extends HydratedBloc<SettingsEvent, SettingsState> {
       _settingsRepo.totalAttempts = state.totalAttempts;
       _settingsRepo.intervalBetweenAttempts = state.intervalBetweenAttempts;
       _settingsRepo.nBackValue = state.nBackValue;
+      _settingsRepo.dimension = state.dimension;
       _settingsRepo.zenMode = state.zenMode;
       _settingsRepo.hints = state.hints;
 

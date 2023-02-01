@@ -11,6 +11,7 @@ class SettingsChangeEvent extends SettingsEvent {
   final int? totalAttemptsOption;
   final int? intervalBetweenAttemptsOption;
   final int? nBackValueOption;
+  final int? dimensionOption;
   final bool? zenModeOption;
   final bool? hintsOption;
 
@@ -18,6 +19,7 @@ class SettingsChangeEvent extends SettingsEvent {
     this.totalAttemptsOption,
     this.intervalBetweenAttemptsOption,
     this.nBackValueOption,
+    this.dimensionOption,
     this.zenModeOption,
     this.hintsOption,
   });
@@ -27,6 +29,7 @@ class SettingsChangeEvent extends SettingsEvent {
         totalAttemptsOption,
         intervalBetweenAttemptsOption,
         nBackValueOption,
+        dimensionOption,
         zenModeOption,
         hintsOption,
       ];

@@ -11,11 +11,17 @@ void showAlertDialog({
   required int selectedOption,
   required int root,
 }) {
-  final additionalText = root == 0
-      ? attemptsText
-      : root == 1
-          ? secondsText
-          : itemsbackText;
+  late String additionalText;
+
+  if (root == 0) {
+    additionalText = attemptsText;
+  } else if (root == 1) {
+    additionalText = secondsText;
+  } else if (root == 2) {
+    additionalText = itemsbackText;
+  } else if (root == 3) {
+    additionalText = dimensionsText;
+  }
 
   showDialog(
     context: context,
@@ -52,8 +58,10 @@ void showAlertDialog({
                     event = SettingsChangeEvent(
                       intervalBetweenAttemptsOption: option,
                     );
-                  } else {
+                  } else if (root == 2) {
                     event = SettingsChangeEvent(nBackValueOption: option);
+                  } else if (root == 3) {
+                    event = SettingsChangeEvent(dimensionOption: option);
                   }
 
                   context.read<SettingsBloc>().add(event);

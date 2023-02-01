@@ -1,4 +1,4 @@
-String trainingAppbarText(int value) => '$value-back';
+String trainingAppbarText(int value) => '$value-Back';
 
 const categoryText = 'Category';
 const positionText = 'Position';
@@ -21,13 +21,15 @@ const resultsExcellent = 'Excellent! Perfect!';
 const settingsText = 'Settings';
 const totalAttemptsText = 'Total attempts';
 const intervalBetweenAttemptsText = 'Interval between attempts';
-const nBackValueText = 'N-back value';
+const nBackValueText = 'N-Back value';
+const dimensionText = 'Dimensions';
 const zenModeText = 'Zen Mode';
 const hintsText = 'Hints';
 const clickToChangeText = 'Click to change';
 const attemptsText = 'attempts';
 const secondsText = 'sec.';
 const itemsbackText = 'item(s) back';
+const dimensionsText = 'dimension(s)';
 
 const mainTitle = 'N-Back - Attention game';
 const mainDescription = '''

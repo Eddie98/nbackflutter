@@ -23,10 +23,7 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       trainingInitialEventHandler,
       transformer: sequential(),
     );
-    on<TrainingStartEvent>(
-      trainingStartEventHandler,
-      transformer: sequential(),
-    );
+
     on<TrainingColorBtnClickEvent>(
       trainingColorBtnClickEventHandler,
       transformer: sequential(),
@@ -35,15 +32,25 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
       trainingPositionBtnClickEventHandler,
       transformer: sequential(),
     );
+    on<TrainingStartEvent>(
+      trainingStartEventHandler,
+      transformer: sequential(),
+    );
   }
 
   bool checkLastAndNPosBackEquality(List list) =>
       list.last == list.reversed.elementAt(_settingsRepo.nBackValue);
 
-  void trainingInitialEventHandler(event, emit) =>
+  void trainingInitialEventHandler(
+    TrainingInitialEvent event,
+    Emitter<TrainingState> emit,
+  ) =>
       emit(const TrainingProccess());
 
-  void trainingColorBtnClickEventHandler(event, emit) {
+  void trainingColorBtnClickEventHandler(
+    TrainingColorBtnClickEvent event,
+    Emitter<TrainingState> emit,
+  ) {
     final state = this.state;
 
     if (state is TrainingProccess) {
@@ -78,7 +85,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     }
   }
 
-  void trainingPositionBtnClickEventHandler(event, emit) {
+  void trainingPositionBtnClickEventHandler(
+    TrainingPositionBtnClickEvent event,
+    Emitter<TrainingState> emit,
+  ) {
     final state = this.state;
 
     if (state is TrainingProccess) {
@@ -113,7 +123,10 @@ class TrainingBloc extends Bloc<TrainingEvent, TrainingState> {
     }
   }
 
-  void trainingStartEventHandler(event, emit) {
+  void trainingStartEventHandler(
+    TrainingStartEvent event,
+    Emitter<TrainingState> emit,
+  ) {
     final state = this.state;
 
     if (state is TrainingProccess) {

@@ -11,6 +11,7 @@ class SettingsMainState extends SettingsState {
   final int totalAttempts;
   final int intervalBetweenAttempts;
   final int nBackValue;
+  final int dimension;
   final bool zenMode;
   final bool hints;
 
@@ -18,6 +19,7 @@ class SettingsMainState extends SettingsState {
     this.totalAttempts = defaultTotalAttempts,
     this.intervalBetweenAttempts = defaultIntervalBetweenAttempts,
     this.nBackValue = defaultNBackValue,
+    this.dimension = defaultDimension,
     this.zenMode = defaultZenMode,
     this.hints = defaultHints,
   });
@@ -26,6 +28,7 @@ class SettingsMainState extends SettingsState {
         'totalAttempts': totalAttempts,
         'intervalBetweenAttempts': intervalBetweenAttempts,
         'nBackValue': nBackValue,
+        'dimension': dimension,
         'zenMode': zenMode,
         'hints': hints,
       };
@@ -34,6 +37,7 @@ class SettingsMainState extends SettingsState {
     int? totalAttempts,
     int? intervalBetweenAttempts,
     int? nBackValue,
+    int? dimension,
     bool? zenMode,
     bool? hints,
   }) {
@@ -42,6 +46,7 @@ class SettingsMainState extends SettingsState {
       intervalBetweenAttempts:
           intervalBetweenAttempts ?? this.intervalBetweenAttempts,
       nBackValue: nBackValue ?? this.nBackValue,
+      dimension: dimension ?? this.dimension,
       zenMode: zenMode ?? this.zenMode,
       hints: hints ?? this.hints,
     );
@@ -52,6 +57,7 @@ class SettingsMainState extends SettingsState {
         totalAttempts,
         intervalBetweenAttempts,
         nBackValue,
+        dimension,
         zenMode,
         hints,
       ];

@@ -79,6 +79,17 @@ class SettingsPage extends StatelessWidget {
                           root: 2,
                         ),
                       ),
+                      DialogListItemWidget(
+                        title: dimensionText,
+                        subTitle:
+                            '${state.dimension} $dimensionsText. $clickToChangeText',
+                        onTap: () => showAlertDialog(
+                          context: context,
+                          options: dimensionOptions,
+                          selectedOption: state.dimension,
+                          root: 3,
+                        ),
+                      ),
                       SwitchListItemWidget(
                         title: zenModeText,
                         value: state.zenMode,
