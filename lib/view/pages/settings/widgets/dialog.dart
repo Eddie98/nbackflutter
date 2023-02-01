@@ -48,6 +48,16 @@ void showAlertDialog({
 
               final isSelected = option == selectedOption;
 
+              if (root == 3) {
+                if (option == -1) {
+                  additionalText = '$dimensionsText $colorText';
+                } else if (option == 1) {
+                  additionalText = '$dimensionsText $positionText';
+                } else {
+                  additionalText = dimensionsText;
+                }
+              }
+
               return ListTile(
                 onTap: () {
                   late final SettingsChangeEvent event;
@@ -69,7 +79,7 @@ void showAlertDialog({
                 },
                 minLeadingWidth: defaultHorPadding,
                 title: Text(
-                  '$option $additionalText',
+                  '${option == -1 ? '1' : option} $additionalText',
                   style: const TextStyle().copyWith(
                     color: Colors.white,
                   ),
